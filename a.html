@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Section</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Footer Styles */
+        .footer-section {
+            background: #19191a;
+            padding: 70px 0 0;
+        }
+
+        .footer-text {
+            padding-bottom: 30px;
+        }
+
+        .ft-about .logo img {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .ft-about p {
+            color: #b7b7b7;
+            margin-bottom: 20px;
+        }
+
+        .fa-social {
+            margin-top: 20px;
+        }
+
+        .fa-social a {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            background: #dfa974;
+            color: #ffffff;
+            text-align: center;
+            line-height: 45px;
+            border-radius: 50%;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .fa-social a:hover {
+            background: #ffffff;
+            color: #dfa974;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(223, 169, 116, 0.4);
+        }
+
+        .ft-contact h6,
+        .ft-newslatter h6 {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .ft-contact h6 i,
+        .ft-newslatter h6 i {
+            color: #dfa974;
+            margin-right: 8px;
+        }
+
+        .ft-contact ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ft-contact ul li {
+            color: #b7b7b7;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .ft-contact ul li i {
+            color: #dfa974;
+            margin-right: 10px;
+            width: 16px;
+        }
+
+        .ft-newslatter p {
+            color: #b7b7b7;
+            margin-bottom: 20px;
+        }
+
+        .fn-form {
+            position: relative;
+        }
+
+        .fn-form input {
+            width: 100%;
+            padding: 12px 50px 12px 15px;
+            border: 1px solid #333;
+            background: #333;
+            color: #ffffff;
+            border-radius: 25px;
+        }
+
+        .fn-form input::placeholder {
+            color: #b7b7b7;
+        }
+
+        .fn-form button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #dfa974;
+            border: none;
+            color: #ffffff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .copyright-option {
+            background: #111111;
+            padding: 20px 0;
+        }
+
+        .copyright-option ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .copyright-option ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .ft-newslatter p {
+            color: #b7b7b7;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .ft-newslatter p i {
+            color: #dfa974;
+            margin-right: 8px;
+        }
+
+        .copyright-option ul li a {
+            color: #b7b7b7;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .copyright-option ul li a i {
+            color: #dfa974;
+            margin-right: 6px;
+            width: 14px;
+        }
+
+        .co-text p {
+            color: #b7b7b7;
+            margin: 0;
+            text-align: right;
+        }
+
+        .co-text a {
+            color: #dfa974;
+        }
+    </style>
+</head>
+
+<body>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-text">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="ft-about">
+                            <div class="logo">
+                                <a href="#">
+                                    <img src="img/footer-logo.png" alt="">
+                                </a>
+                            </div>
+                            <p>We inspire and reach millions of travelers<br> across 90 local websites</p>
+                            <div class="fa-social">
+                                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 offset-lg-1">
+                        <div class="ft-contact">
+                            <h6> Contact Us</h6>
+                            <ul>
+                                <li><i class="fas fa-phone-alt"></i> (12) 345 67890</li>
+                                <li><i class="fas fa-envelope"></i> info.colorlib@gmail.com</li>
+                                <li><i class="fas fa-map-marker-alt"></i> 856 Cordia Extension Apt. 356, Lake, United
+                                    State</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 offset-lg-1">
+                        <div class="ft-newslatter">
+                            <h6> New latest</h6>
+                            <p><i class="fas fa-bell"></i> Get the latest updates and offers.</p>
+                            <form action="#" class="fn-form">
+                                <input type="text" placeholder="Email">
+                                <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-option">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <ul>
+                            <li><a href="#"><i class="fas fa-file-contract"></i> Terms of use</a></li>
+                            <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy</a></li>
+                            <li><a href="#"><i class="fas fa-leaf"></i> Environmental Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="co-text">
+                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright ©
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved | <a
+                                    href="https://nexgenai.asia/" target="_blank"
+                                    style="text-decoration: none;">nexgenai.asia</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
