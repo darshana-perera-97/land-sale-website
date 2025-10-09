@@ -1738,3 +1738,163 @@ section {
   display: flex;
   justify-content: center;
 }
+
+/* Footer Section Styles */
+.footer-section {
+  background: #19191a;
+  padding: 70px 0 0;
+}
+
+.footer-text {
+  padding-bottom: 30px;
+}
+
+.ft-about .logo img {
+  max-width: 150px;
+  margin-bottom: 20px;
+}
+
+.ft-about p {
+  color: #b7b7b7;
+  margin-bottom: 20px;
+}
+
+.fa-social {
+  margin-top: 20px;
+}
+
+.fa-social a {
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  background: #dfa974;
+  color: #ffffff;
+  text-align: center;
+  line-height: 45px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+
+.fa-social a:hover {
+  background: #ffffff;
+  color: #dfa974;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(223, 169, 116, 0.4);
+}
+
+.ft-contact h6,
+.ft-newslatter h6 {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.ft-contact h6 i,
+.ft-newslatter h6 i {
+  color: #dfa974;
+  margin-right: 8px;
+}
+
+.ft-contact ul {
+  list-style: none;
+  padding: 0;
+}
+
+.ft-contact ul li {
+  color: #b7b7b7;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.ft-contact ul li i {
+  color: #dfa974;
+  margin-right: 10px;
+  width: 16px;
+}
+
+.ft-newslatter p {
+  color: #b7b7b7;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.ft-newslatter p i {
+  color: #dfa974;
+  margin-right: 8px;
+}
+
+.fn-form {
+  position: relative;
+}
+
+.fn-form input {
+  width: 100%;
+  padding: 12px 50px 12px 15px;
+  border: 1px solid #333;
+  background: #333;
+  color: #ffffff;
+  border-radius: 25px;
+}
+
+.fn-form input::placeholder {
+  color: #b7b7b7;
+}
+
+.fn-form button {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #dfa974;
+  border: none;
+  color: #ffffff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.copyright-option {
+  background: #111111;
+  padding: 20px 0;
+}
+
+.copyright-option ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.copyright-option ul li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.copyright-option ul li a {
+  color: #b7b7b7;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.copyright-option ul li a i {
+  color: #dfa974;
+  margin-right: 6px;
+  width: 14px;
+}
+
+.co-text p {
+  color: #b7b7b7;
+  margin: 0;
+  text-align: right;
+}
+
+.co-text a {
+  color: #dfa974;
+}
