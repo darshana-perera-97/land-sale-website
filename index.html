@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rehomes Slider Clone</title>
+  <title>Dubai Prime Properties - Premium Real Estate Solutions</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Google Fonts -->
@@ -16,6 +16,273 @@
   
   <!-- Chatbot CSS -->
   <link rel="stylesheet" href="chatbot/chatbot.css">
+  <style>
+    html, body {
+      width: 100vw;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    
+    .container-fluid {
+      width: 100vw;
+      max-width: 100vw;
+    }
+    
+    .hero-section {
+      width: 100vw;
+      max-width: 100vw;
+    }
+    
+    .hero-bg {
+      width: 100vw;
+      max-width: 100vw;
+    }
+    
+    .hero-overlay {
+      width: 100vw;
+      max-width: 100vw;
+    }
+    
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    
+    .hero-cta i {
+      font-size: 14px;
+      transition: transform 0.3s ease;
+    }
+    
+    .hero-cta:hover i {
+      transform: translateX(4px);
+    }
+    
+    /* Chatbot Popup Modal Styles - Matching Side Chatbot Theme */
+    .chatbot-popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 10000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+    
+    .chatbot-popup-overlay.active {
+      display: flex;
+    }
+    
+    .chatbot-popup-container {
+      background: #ffffff;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 480px;
+      height: 80%;
+      max-height: 600px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid #e5e5e5;
+      animation: popupSlideIn 0.3s ease-out;
+    }
+    
+    @keyframes popupSlideIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8) translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    
+    .chatbot-popup-header {
+      background: #ffffff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    
+    .chatbot-popup-header-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .chatbot-popup-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6c757d;
+      border: 2px solid #e5e5e5;
+    }
+    
+    .chatbot-popup-info h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .chatbot-popup-status {
+      font-size: 12px;
+      color: #28a745;
+      font-weight: 500;
+    }
+    
+    .chatbot-popup-close {
+      background: none;
+      border: none;
+      color: #6c757d;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .chatbot-popup-close:hover {
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    
+    .chatbot-popup-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #ffffff;
+    }
+    
+    .chatbot-popup-input-container {
+      padding: 20px;
+      background: #ffffff;
+      border-top: 1px solid #e5e5e5;
+      display: flex;
+      gap: 10px;
+    }
+    
+    .chatbot-popup-input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid #e5e5e5;
+      border-radius: 25px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s ease;
+      background: #ffffff;
+    }
+    
+    .chatbot-popup-input:focus {
+      border-color: #007bff;
+    }
+    
+    .chatbot-popup-send {
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .chatbot-popup-send:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+    }
+    
+    .chatbot-popup-message {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .chatbot-popup-message.user {
+      flex-direction: row-reverse;
+    }
+    
+    .chatbot-popup-message-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6c757d;
+      font-size: 14px;
+      flex-shrink: 0;
+      border: 1px solid #e5e5e5;
+    }
+    
+    .chatbot-popup-message.user .chatbot-popup-message-avatar {
+      background: #007bff;
+      color: white;
+      border: 1px solid #007bff;
+    }
+    
+    .chatbot-popup-message-content {
+      background: #f8f9fa;
+      padding: 12px 16px;
+      border-radius: 18px;
+      max-width: 80%;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e5e5;
+    }
+    
+    .chatbot-popup-message.user .chatbot-popup-message-content {
+      background: #007bff;
+      color: white;
+      border: 1px solid #007bff;
+    }
+    
+    .chatbot-popup-message-content p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.4;
+      font-weight: 300;
+    }
+    
+    /* Chatbot Font Family - Poppins */
+    .chatbot-popup-container,
+    .chatbot-popup-header h4,
+    .chatbot-popup-status,
+    .chatbot-popup-input,
+    .chatbot-popup-message-content p {
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Mobile Footer Copyright Centering */
+    @media (max-width: 768px) {
+      .co-text p{
+        text-align: center !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -27,13 +294,12 @@
       <div class="row h-100">
         <div class="col-12">
           <div class="hero-content">
-            <img src="https://demo2.wpopal.com/rehomes/wp-content/uploads/2019/10/logo.svg" alt="Rehomes Logo"
+            <img src="https://demo2.wpopal.com/rehomes/wp-content/uploads/2019/10/logo.svg" alt="Dubai Prime Properties Logo"
               class="hero-logo" decoding="async" />
-            <h1 class="hero-title">
-              <span class="title-line-1">Your Dubai Real Estate Co-Pilot.</span>
+            <h1 class="hero-title px-4">
+              <span class="title-line-1">Dubai Prime Properties</span>
+              <span class="title-line-2">Premium Real Estate Solutions</span>
             </h1>
-            <div class="hero-subtitle"> Leasing. Labour Accommodation. Land Investment. Instantly clarified.
-              Simply tell our AI what you need.</div>
 
             <!-- AI Search Section -->
             <div class="ai-search-section">
@@ -43,232 +309,358 @@
                     <circle cx="11" cy="11" r="8"></circle>
                     <path d="m21 21-4.35-4.35"></path>
                   </svg>
-                  <input type="text" class="ai-search-input" placeholder="Show me people likely to sell their home." />
+                  <input type="text" class="ai-search-input" placeholder="Find luxury properties in Dubai Marina..." />
                 </div>
-                <button class="ai-search-btn">
+                <button class="ai-search-btn" onclick="openChatbotPopup()">
                   <div class="sparkle-icon"></div>
                   Ask AI
                 </button>
               </div>
             </div>
 
-            <a href="#demo" class="hero-cta" onclick="scrollToDemo(event)">View Properties <i>→</i></a>
+            <a href="#properties" class="hero-cta" onclick="scrollToProperties(event)">Explore Properties <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Trust Bar Section Begin -->
-  <section class="trust-bar-section">
+  <!-- About Us Section Begin -->
+  <section class="aboutus-section spad">
     <div class="container">
-      <!-- Metrics Row -->
       <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="trust-metric">
-            <div class="metric-number">AED 2B+</div>
-            <div class="metric-label">Properties Managed & Transacted</div>
+        <div class="col-lg-6">
+          <div class="about-text">
+            <div class="section-title">
+              <span>About Us</span>
+              <h2>Dubai Prime Properties <br>Real Estate Excellence</h2>
+            </div>
+            <p class="f-para">Dubai Prime Properties is a leading real estate company specializing in luxury properties across Dubai. We're passionate about connecting clients with their dream homes and investment opportunities.</p>
+            <p class="s-para">With over 15 years of experience in Dubai's dynamic real estate market, we offer comprehensive services from property sales and rentals to investment consulting and property management.</p>
+            <a href="#" class="primary-btn about-btn mb-5">Learn More</a>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="trust-metric">
-            <div class="metric-number">1,500+</div>
-            <div class="metric-label">Successful Client Journeys</div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="trust-metric">
-            <div class="metric-number">100%</div>
-            <div class="metric-label">RERA Certified & Compliant</div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="trust-metric">
-            <div class="metric-number">24-Hour</div>
-            <div class="metric-label">Client Response Guarantee</div>
+        <div class="col-lg-6">
+          <div class="about-pic">
+            <div class="row">
+              <div class="col-sm-6">
+                <img src="./benchmark/img/about/about-1.jpg" alt="">
+              </div>
+              <div class="col-sm-6">
+                <img src="./benchmark/img/about/about-2.jpg" alt="">
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-
-
     </div>
   </section>
-  <!-- Partner Logos Row -->
-  <div class="row">
-    <div class="col-12">
-      <div class="trust-partners">
-        <div class="partners-label pt-3 pb-2">Official Partners with</div>
-        <div class="partners-marquee pb-5">
-          <div class="marquee-content">
-            <div class="partner-logo">
-              <i class="fas fa-building"></i>
-              <span>Dubai Land Department</span>
-            </div>
-            <div class="partner-logo">
-              <i class="fas fa-search"></i>
-              <span>Property Finder</span>
-            </div>
-            <div class="partner-logo">
-              <i class="fas fa-home"></i>
-              <span>Bayut</span>
-            </div>
-            <div class="partner-logo">
-              <i class="fas fa-city"></i>
-              <span>Emaar</span>
-            </div>
-            <div class="partner-logo">
-              <i class="fas fa-building"></i>
-              <span>DAMAC</span>
-            </div>
-            <div class="partner-logo">
-              <i class="fas fa-chart-line"></i>
-              <span>Dubai Properties</span>
-            </div>
-            <!-- Duplicate for seamless loop -->
-            <div class="partner-logo">
-              <i class="fas fa-building"></i>
-              <span>Dubai Land Department</span>
-            </div>
-            <div class="partner-logo">
-              <i class="fas fa-search"></i>
-              <span>Property Finder</span>
-            </div>
-            <div class="partner-logo">
-              <i class="fas fa-home"></i>
-              <span>Bayut</span>
-            </div>
-            <div class="partner-logo">
-              <i class="fas fa-city"></i>
-              <span>Emaar</span>
-            </div>
-            <div class="partner-logo">
-              <i class="fas fa-building"></i>
-              <span>DAMAC</span>
-            </div>
-            <div class="partner-logo">
-              <i class="fas fa-chart-line"></i>
-              <span>Dubai Properties</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Specialized Divisions Section Begin -->
-  <section class="specialized-divisions-section">
+  <!-- About Us Section End -->
+
+  <!-- Services Section Begin -->
+  <section class="services-section spad">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <div class="section-title">
-            <span>Our Expertise</span>
-            <h2>Expertise for Every Ambition.</h2>
+            <span>Our Services</span>
+            <h2>Comprehensive Real Estate Solutions</h2>
           </div>
         </div>
       </div>
-      
+      <div class="row">
+        <div class="col-lg-4 col-sm-6">
+          <div class="service-item">
+            <i class="fas fa-home"></i>
+            <h4>Property Sales</h4>
+            <p>Expert assistance in buying and selling luxury properties across Dubai's most prestigious locations.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="service-item">
+            <i class="fas fa-key"></i>
+            <h4>Property Rentals</h4>
+            <p>Comprehensive rental services for both tenants and landlords with premium property management.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="service-item">
+            <i class="fas fa-chart-line"></i>
+            <h4>Investment Consulting</h4>
+            <p>Strategic investment advice for maximizing returns in Dubai's thriving real estate market.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="service-item">
+            <i class="fas fa-building"></i>
+            <h4>Commercial Properties</h4>
+            <p>Specialized services for commercial real estate including offices, retail spaces, and warehouses.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="service-item">
+            <i class="fas fa-map-marked-alt"></i>
+            <h4>Land Development</h4>
+            <p>Expert guidance on land acquisition and development opportunities in prime Dubai locations.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="service-item">
+            <i class="fas fa-handshake"></i>
+            <h4>Property Management</h4>
+            <p>Complete property management services ensuring optimal maintenance and tenant satisfaction.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Services Section End -->
+
+  <!-- Properties Section Begin -->
+  <section id="properties" class="hp-room-section">
+    <div class="container-fluid">
+      <div class="hp-room-items">
+  <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="hp-room-item set-bg" data-setbg="./benchmark/img/room/room-b1.jpg" style="background-image: url('./benchmark/img/room/room-b1.jpg');">
+              <div class="hr-text">
+                <h3>Dubai Marina Apartment</h3>
+                <h2 class="pb-5">AED 1,800,000<span> (14% off)</span></h2>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td class="r-o">Size:</td>
+                      <td>1,200 sq ft</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Bedrooms:</td>
+                      <td>2 Bedrooms</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Location:</td>
+                      <td>Dubai Marina</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Features:</td>
+                      <td>Marina View, Gym, Pool</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a href="#" class="primary-btn">View Details</a>
+            </div>
+            </div>
+            </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="hp-room-item set-bg" data-setbg="./benchmark/img/room/room-b2.jpg" style="background-image: url('./benchmark/img/room/room-b2.jpg');">
+              <div class="hr-text">
+                <h3>Downtown Dubai Villa</h3>
+                <h2 class="pb-5">AED 3,200,000<span> (15% off)</span></h2>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td class="r-o">Size:</td>
+                      <td>2,500 sq ft</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Bedrooms:</td>
+                      <td>4 Bedrooms</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Location:</td>
+                      <td>Downtown Dubai</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Features:</td>
+                      <td>City View, Garden, Pool</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a href="#" class="primary-btn">View Details</a>
+            </div>
+            </div>
+            </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="hp-room-item set-bg" data-setbg="./benchmark/img/room/room-b3.jpg" style="background-image: url('./benchmark/img/room/room-b3.jpg');">
+              <div class="hr-text">
+                <h3>Palm Jumeirah Villa</h3>
+                <h2 class="pb-5">AED 8,500,000<span> (8% off)</span></h2>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td class="r-o">Size:</td>
+                      <td>4,000 sq ft</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Bedrooms:</td>
+                      <td>5 Bedrooms</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Location:</td>
+                      <td>Palm Jumeirah</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Features:</td>
+                      <td>Beachfront, Private Pool</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a href="#" class="primary-btn">View Details</a>
+            </div>
+            </div>
+            </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="hp-room-item set-bg" data-setbg="./benchmark/img/room/room-b4.jpg" style="background-image: url('./benchmark/img/room/room-b4.jpg');">
+              <div class="hr-text">
+                <h3>Business Bay Apartment</h3>
+                <h2 class="pb-5">AED 1,200,000<span> (20% off)</span></h2>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td class="r-o">Size:</td>
+                      <td>800 sq ft</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Bedrooms:</td>
+                      <td>1 Bedroom</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Location:</td>
+                      <td>Business Bay</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Features:</td>
+                      <td>Modern Design, Gym</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a href="#" class="primary-btn">View Details</a>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Properties Section End -->
+  
+  <!-- Introduction Text Section Begin -->
+  <section class="intro-text-section">
+    <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <div class="divisions-tabs">
-            <!-- Tab Navigation -->
-            <ul class="nav nav-tabs" id="divisionsTab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="leasing-tab" data-bs-toggle="tab" data-bs-target="#leasing" type="button" role="tab" aria-controls="leasing" aria-selected="true">
-                  <i class="fas fa-home"></i>
-                  <span>Property Leasing</span>
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="accommodation-tab" data-bs-toggle="tab" data-bs-target="#accommodation" type="button" role="tab" aria-controls="accommodation" aria-selected="false">
-                  <i class="fas fa-users"></i>
-                  <span>Labour & Staff Accommodation</span>
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="investment-tab" data-bs-toggle="tab" data-bs-target="#investment" type="button" role="tab" aria-controls="investment" aria-selected="false">
-                  <i class="fas fa-chart-line"></i>
-                  <span>Land & Investment</span>
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="brokerage-tab" data-bs-toggle="tab" data-bs-target="#brokerage" type="button" role="tab" aria-controls="brokerage" aria-selected="false">
-                  <i class="fas fa-handshake"></i>
-                  <span>Professional Brokerage</span>
-                </button>
-              </li>
-            </ul>
-
-            <!-- Tab Content -->
-            <div class="tab-content" id="divisionsTabContent">
-              <!-- Property Leasing Tab -->
-              <div class="tab-pane fade show active" id="leasing" role="tabpanel" aria-labelledby="leasing-tab">
-                <div class="row align-items-center">
-                  <div class="col-lg-6">
-                    <div class="division-content">
-                      <h3>Property Leasing</h3>
-                      <p>Curated residential and commercial spaces designed for your lifestyle and business. From sky-high penthouses to strategic retail locations, experience Dubai's best.</p>
-                      <a href="#" class="division-btn">Explore Listings</a>
+          <div class="section-title">
+            <span>Our Commitment</span>
+            <h2>Excellence in Real Estate</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="intro-text-content">
+            <p>At Dubai Prime Properties, we believe that exceptional service and market expertise create successful real estate transactions. Our commitment to excellence has earned us recognition from clients worldwide, who consistently praise our dedication to providing the highest standards of real estate services and investment opportunities.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <div class="intro-cta-container">
+            <a href="#" class="intro-cta-btn">Explore Properties</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Introduction Text Section End -->
+      
+  <!-- Testimonial Section Begin -->
+  <section class="testimonial-section spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-title">
+            <span>Client Testimonials</span>
+            <h2>What Our Clients Say?</h2>
+          </div>
                     </div>
                   </div>
-                  <div class="col-lg-6">
-                    <div class="division-image">
-                      <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Stunning apartment interior" class="img-fluid">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0"
+                  class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"
+                  aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"
+                  aria-label="Slide 3"></button>
+              <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="3"
+                  aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="ts-item">
+                  <p>Dubai Prime Properties helped us find our dream home in Dubai Marina. Their expertise in the local market and attention to detail made the entire process seamless. We couldn't be happier with our investment and the ongoing support they provide.</p>
+                  <div class="ti-author">
+                    <div class="rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star-half-alt"></i>
                     </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Labour & Staff Accommodation Tab -->
-              <div class="tab-pane fade" id="accommodation" role="tabpanel" aria-labelledby="accommodation-tab">
-                <div class="row align-items-center">
-                  <div class="col-lg-6">
-                    <div class="division-content">
-                      <h3>Labour & Staff Accommodation</h3>
-                      <p>We redefine workforce housing. Discover compliant, safe, and productive living environments for your teams, managed with precision and care.</p>
-                      <a href="#" class="division-btn">View Corporate Solutions</a>
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="division-image">
-                      <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Clean, modern accommodation facility" class="img-fluid">
-                    </div>
+                    <h5> - Ahmed Al-Rashid</h5>
                   </div>
                 </div>
               </div>
-
-              <!-- Land & Investment Tab -->
-              <div class="tab-pane fade" id="investment" role="tabpanel" aria-labelledby="investment-tab">
-                <div class="row align-items-center">
-                  <div class="col-lg-6">
-                    <div class="division-content">
-                      <h3>Land & Investment</h3>
-                      <p>Unlock the future of Dubai. We provide exclusive access and data-driven advisory for strategic land acquisition and development projects.</p>
-                      <a href="#" class="division-btn">Access Investment Opportunities</a>
+              <div class="carousel-item">
+                <div class="ts-item">
+                  <p>The investment consulting services at Dubai Prime Properties exceeded our expectations. They provided detailed market analysis and helped us identify the perfect commercial property in Business Bay. Their professional approach and market knowledge are unmatched.</p>
+                  <div class="ti-author">
+                    <div class="rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
                     </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="division-image">
-                      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Architectural blueprint over a plot of land" class="img-fluid">
-                    </div>
+                    <h5> - Sarah Johnson</h5>
                   </div>
                 </div>
               </div>
-
-              <!-- Professional Brokerage Tab -->
-              <div class="tab-pane fade" id="brokerage" role="tabpanel" aria-labelledby="brokerage-tab">
-                <div class="row align-items-center">
-                  <div class="col-lg-6">
-                    <div class="division-content">
-                      <h3>Professional Brokerage</h3>
-                      <p>At the heart of every successful transaction is an advisor you trust. Our RERA-certified brokerage provides end-to-end advisory, combining market intelligence with a relentless focus on your goals for results that exceed expectations.</p>
-                      <a href="#" class="division-btn">Meet Our Experts</a>
+              <div class="carousel-item">
+                <div class="ts-item">
+                  <p>We had an amazing family vacation at Sona Hotel. The kids loved the pool area
+                      and the family-friendly activities. The location was perfect for exploring the
+                      city,
+                      and the concierge service helped us plan the best itinerary. Will definitely
+                      return!</p>
+                  <div class="ti-author">
+                    <div class="rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
                     </div>
+                    <h5> - Michael Chen</h5>
                   </div>
-                  <div class="col-lg-6">
-                    <div class="division-image">
-                      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Modern office with RERA-certified advisors" class="img-fluid">
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="ts-item">
+                  <p>The attention to detail at Sona Hotel is remarkable. Every aspect of our stay
+                      was carefully thought out, from the luxurious bedding to the gourmet dining
+                      options.
+                      This is truly a world-class establishment that exceeds expectations.</p>
+                  <div class="ti-author">
+                    <div class="rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
                     </div>
+                    <h5> - Emily Rodriguez</h5>
                   </div>
                 </div>
               </div>
@@ -278,11 +670,7 @@
       </div>
     </div>
   </section>
-  <!-- Specialized Divisions Section End -->
-
- 
-
-  
+  <!-- Testimonial Section End -->
 
   <!-- Footer Section Begin -->
   <footer class="footer-section">
@@ -296,7 +684,7 @@
                   <img src="img/footer-logo.png" alt="">
                 </a>
               </div>
-              <p>We inspire and reach millions of travelers<br> across 90 local websites</p>
+              <p>Dubai Prime Properties - Your trusted partner<br> in luxury real estate across Dubai</p>
               <div class="fa-social">
                 <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
@@ -310,10 +698,9 @@
             <div class="ft-contact">
               <h6> Contact Us</h6>
               <ul>
-                <li><i class="fas fa-phone-alt"></i> (12) 345 67890</li>
-                <li><i class="fas fa-envelope"></i> info.colorlib@gmail.com</li>
-                <li><i class="fas fa-map-marker-alt"></i> 856 Cordia Extension Apt. 356, Lake, United
-                  State</li>
+                <li><i class="fas fa-phone-alt"></i> +94 71 66 96 196</li>
+                <li><i class="fas fa-envelope"></i> support@nexgenai.asia</li>
+                <li><i class="fas fa-map-marker-alt"></i> Dubai Marina, Dubai, UAE</li>
               </ul>
             </div>
           </div>
@@ -345,7 +732,8 @@
               <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 Copyright ©
                 <script>document.write(new Date().getFullYear());</script> All rights reserved | <a
-                  href="https://nexgenai.asia/" target="_blank" style="text-decoration: none;">nexgenai.asia</a>
+                  href="https://nexgenai.asia/" target="_blank"
+                  style="text-decoration: none;">nexgenai.asia</a>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
               </p>
             </div>
@@ -361,7 +749,42 @@
   
   <!-- Chatbot JS -->
   <script src="chatbot/chatbot.js"></script>
-  
+
+  <!-- Chatbot Popup Modal -->
+  <div id="chatbot-popup-overlay" class="chatbot-popup-overlay">
+    <div class="chatbot-popup-container">
+      <div class="chatbot-popup-header">
+        <div class="chatbot-popup-header-content">
+          <div class="chatbot-popup-avatar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div class="chatbot-popup-info">
+            <h4>Real Estate Assistant</h4>
+            <span class="chatbot-popup-status">Online</span>
+          </div>
+        </div>
+        <button class="chatbot-popup-close" onclick="closeChatbotPopup()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="chatbot-popup-messages" id="chatbot-popup-messages">
+        <!-- Welcome message will be added dynamically if needed -->
+      </div>
+      <div class="chatbot-popup-input-container">
+        <input type="text" class="chatbot-popup-input" id="chatbot-popup-input" placeholder="Ask about properties..." />
+        <button class="chatbot-popup-send" onclick="sendPopupMessage()">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Floating Chatbot -->
   <div id="floating-chatbot" class="chatbot-container">
     <!-- Chatbot Toggle Button -->
@@ -428,79 +851,199 @@
   </div>
 
   <script>
-    function scrollToDemo(event) {
+    function scrollToProperties(event) {
       event.preventDefault();
-      document.querySelector('#demo').scrollIntoView({ behavior: 'smooth' });
+      document.querySelector('#properties').scrollIntoView({ behavior: 'smooth' });
     }
-
-    // Partners Marquee Animation
-    function initPartnersMarquee() {
-      const marqueeContent = document.querySelector('.marquee-content');
-      if (!marqueeContent) return;
-
-      let position = 0;
-      const speed = 0.5; // pixels per frame
-      const totalWidth = marqueeContent.scrollWidth / 2; // Half because we duplicated content
-
-      function animate() {
-        position -= speed;
+    
+    // Popup Chatbot Functions
+    let popupSessionId = 'popup_session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    const popupApiUrl = 'https://landsale-backend.nexgenai.asia/api/chatbot';
+    
+    function openChatbotPopup() {
+      const overlay = document.getElementById('chatbot-popup-overlay');
+      const input = document.getElementById('chatbot-popup-input');
+      overlay.classList.add('active');
+      
+      // Check if user has typed something in the hero search input
+      const heroInput = document.querySelector('.ai-search-input');
+      const heroText = heroInput ? heroInput.value.trim() : '';
+      
+      if (heroText) {
+        // Clear the hero input
+        heroInput.value = '';
         
-        // Reset position when we've scrolled through half the content
-        if (Math.abs(position) >= totalWidth) {
-          position = 0;
+        // Add the user's message to the popup
+        addPopupMessage(heroText, true);
+        
+        // Show typing indicator and send to backend
+        showPopupTypingIndicator();
+        
+        fetch(`${popupApiUrl}/message`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: heroText,
+            sessionId: popupSessionId
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          hidePopupTypingIndicator();
+          if (data.success) {
+            addPopupMessage(data.response);
+          } else {
+            addPopupMessage('I apologize, but I\'m having trouble processing your request right now. Please try again.');
+          }
+        })
+        .catch(error => {
+          console.error('Error sending message:', error);
+          hidePopupTypingIndicator();
+          addPopupMessage('I\'m sorry, but I\'m having connection issues. Please try again in a moment.');
+        });
+      } else {
+        // If no text in hero input, add welcome message and focus on popup input
+        const messagesContainer = document.getElementById('chatbot-popup-messages');
+        if (messagesContainer.children.length === 0) {
+          addWelcomeMessage();
         }
-        
-        marqueeContent.style.transform = `translateX(${position}px)`;
-        requestAnimationFrame(animate);
+        input.focus();
       }
-
-      // Start animation
-      animate();
     }
-
-    // Initialize marquee when page loads
-    document.addEventListener('DOMContentLoaded', initPartnersMarquee);
-
-    // Auto-rotate tabs functionality
-    function initAutoRotateTabs() {
-      const tabButtons = document.querySelectorAll('#divisionsTab button[data-bs-toggle="tab"]');
-      const tabPanes = document.querySelectorAll('#divisionsTabContent .tab-pane');
+    
+    function closeChatbotPopup() {
+      const overlay = document.getElementById('chatbot-popup-overlay');
+      overlay.classList.remove('active');
+    }
+    
+    function addWelcomeMessage() {
+      const messagesContainer = document.getElementById('chatbot-popup-messages');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'chatbot-popup-message';
       
-      if (tabButtons.length === 0) return;
+      const avatar = document.createElement('div');
+      avatar.className = 'chatbot-popup-message-avatar';
+      avatar.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>';
       
-      let currentTabIndex = 0;
+      const messageContent = document.createElement('div');
+      messageContent.className = 'chatbot-popup-message-content';
+      messageContent.innerHTML = '<p>Hello! I\'m your real estate assistant. How can I help you today?</p>';
       
-      function switchToNextTab() {
-        // Remove active class from current tab
-        tabButtons[currentTabIndex].classList.remove('active');
-        tabPanes[currentTabIndex].classList.remove('show', 'active');
-        
-        // Move to next tab (cycle back to 0 if at end)
-        currentTabIndex = (currentTabIndex + 1) % tabButtons.length;
-        
-        // Add active class to next tab
-        tabButtons[currentTabIndex].classList.add('active');
-        tabPanes[currentTabIndex].classList.add('show', 'active');
-        
-        // Update aria attributes
-        tabButtons.forEach((btn, index) => {
-          btn.setAttribute('aria-selected', index === currentTabIndex ? 'true' : 'false');
-        });
-      }
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(messageContent);
       
-      // Start auto-rotation every 30 seconds
-      setInterval(switchToNextTab, 30000);
+      messagesContainer.appendChild(messageDiv);
+    }
+    
+    function sendPopupMessage() {
+      const input = document.getElementById('chatbot-popup-input');
+      const message = input.value.trim();
+      if (!message) return;
       
-      // Pause auto-rotation when user manually clicks a tab
-      tabButtons.forEach((button, index) => {
-        button.addEventListener('click', () => {
-          currentTabIndex = index;
-        });
+      addPopupMessage(message, true);
+      input.value = '';
+      
+      // Show typing indicator
+      showPopupTypingIndicator();
+      
+      // Send to backend
+      fetch(`${popupApiUrl}/message`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: message,
+          sessionId: popupSessionId
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        hidePopupTypingIndicator();
+        if (data.success) {
+          addPopupMessage(data.response);
+        } else {
+          addPopupMessage('I apologize, but I\'m having trouble processing your request right now. Please try again.');
+        }
+      })
+      .catch(error => {
+        console.error('Error sending message:', error);
+        hidePopupTypingIndicator();
+        addPopupMessage('I\'m sorry, but I\'m having connection issues. Please try again in a moment.');
       });
     }
-
-    // Initialize auto-rotate tabs when page loads
-    document.addEventListener('DOMContentLoaded', initAutoRotateTabs);
+    
+    function addPopupMessage(content, isUser = false) {
+      const messagesContainer = document.getElementById('chatbot-popup-messages');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `chatbot-popup-message ${isUser ? 'user' : ''}`;
+      
+      const avatar = document.createElement('div');
+      avatar.className = 'chatbot-popup-message-avatar';
+      avatar.innerHTML = isUser ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>' : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>';
+      
+      const messageContent = document.createElement('div');
+      messageContent.className = 'chatbot-popup-message-content';
+      messageContent.innerHTML = `<p>${content}</p>`;
+      
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(messageContent);
+      
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    function showPopupTypingIndicator() {
+      const messagesContainer = document.getElementById('chatbot-popup-messages');
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'chatbot-popup-message';
+      typingDiv.id = 'popup-typing-indicator';
+      
+      const avatar = document.createElement('div');
+      avatar.className = 'chatbot-popup-message-avatar';
+      avatar.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>';
+      
+      const messageContent = document.createElement('div');
+      messageContent.className = 'chatbot-popup-message-content';
+      messageContent.innerHTML = '<p>AI is typing...</p>';
+      
+      typingDiv.appendChild(avatar);
+      typingDiv.appendChild(messageContent);
+      
+      messagesContainer.appendChild(typingDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    function hidePopupTypingIndicator() {
+      const typingIndicator = document.getElementById('popup-typing-indicator');
+      if (typingIndicator) {
+        typingIndicator.remove();
+      }
+    }
+    
+    // Allow Enter key to send message
+    document.addEventListener('DOMContentLoaded', function() {
+      const popupInput = document.getElementById('chatbot-popup-input');
+      if (popupInput) {
+        popupInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            sendPopupMessage();
+          }
+        });
+      }
+      
+      // Close popup when clicking outside
+      const overlay = document.getElementById('chatbot-popup-overlay');
+      if (overlay) {
+        overlay.addEventListener('click', function(e) {
+          if (e.target === overlay) {
+            closeChatbotPopup();
+          }
+        });
+      }
+    });
   </script>
 </body>
 

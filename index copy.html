@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rehomes Slider Clone</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Chatbot CSS -->
+  <link rel="stylesheet" href="chatbot/chatbot.css">
+  <style>
+    html, body {
+      width: 100vw;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    
+    .container-fluid {
+      width: 100vw;
+      max-width: 100vw;
+    }
+    
+    .hero-section {
+      width: 100vw;
+      max-width: 100vw;
+    }
+    
+    .hero-bg {
+      width: 100vw;
+      max-width: 100vw;
+    }
+    
+    .hero-overlay {
+      width: 100vw;
+      max-width: 100vw;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="container-fluid h-100">
+      <div class="row h-100">
+        <div class="col-12">
+          <div class="hero-content">
+            <img src="https://demo2.wpopal.com/rehomes/wp-content/uploads/2019/10/logo.svg" alt="Rehomes Logo"
+              class="hero-logo" decoding="async" />
+            <h1 class="hero-title">
+              <span class="title-line-1">Modern Real Estate Group</span>
+              <span class="title-line-2">WordPress Theme</span>
+            </h1>
+
+            <!-- AI Search Section -->
+            <div class="ai-search-section">
+              <div class="search-container">
+                <div style="position: relative; flex: 1;">
+                  <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="#4ecdc4" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                  </svg>
+                  <input type="text" class="ai-search-input" placeholder="Show me people likely to sell their home." />
+                </div>
+                <button class="ai-search-btn">
+                  <div class="sparkle-icon"></div>
+                  Ask AI
+                </button>
+              </div>
+            </div>
+
+            <a href="#demo" class="hero-cta" onclick="scrollToDemo(event)">View Properties <i>→</i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us Section Begin -->
+  <section class="aboutus-section spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="about-text">
+            <div class="section-title">
+              <span>About Us</span>
+              <h2>Intercontinental LA <br>Westlake Hotel</h2>
+            </div>
+            <p class="f-para">Sona.com is a leading online accommodation site. We're passionate about
+              travel. Every day, we inspire and reach millions of travelers across 90 local websites in 41
+              languages.</p>
+            <p class="s-para">So when it comes to booking the perfect hotel, vacation rental, resort,
+              apartment, guest house, or tree house, we've got you covered.</p>
+            <a href="#" class="primary-btn about-btn">Read More</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="about-pic">
+            <div class="row">
+              <div class="col-sm-6">
+                <img src="./benchmark/img/about/about-1.jpg" alt="">
+              </div>
+              <div class="col-sm-6">
+                <img src="./benchmark/img/about/about-2.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- About Us Section End -->
+
+  <!-- Services Section Begin -->
+  <section class="services-section spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-title">
+            <span>What We Do</span>
+            <h2>Discover Our Services</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-6">
+          <div class="service-item">
+            <i class="fas fa-car"></i>
+            <h4>Travel Plan</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="service-item">
+            <i class="fas fa-utensils"></i>
+            <h4>Catering Service</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="service-item">
+            <i class="fas fa-bed"></i>
+            <h4>Babysitting</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="service-item">
+            <i class="fas fa-tshirt"></i>
+            <h4>Laundry</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="service-item">
+            <i class="fas fa-clock"></i>
+            <h4>Hire Driver</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="service-item">
+            <i class="fas fa-cocktail"></i>
+            <h4>Bar & Drink</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Services Section End -->
+
+  <!-- Room Section Begin -->
+  <section class="hp-room-section">
+    <div class="container-fluid">
+      <div class="hp-room-items">
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="hp-room-item set-bg" data-setbg="./benchmark/img/room/room-b1.jpg" style="background-image: url('./benchmark/img/room/room-b1.jpg');">
+              <div class="hr-text">
+                <h3>Double Room</h3>
+                <h2 class="pb-5">199$<span>/Pernight</span></h2>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td class="r-o">Size:</td>
+                      <td>30 ft</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Capacity:</td>
+                      <td>Max persion 5</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Bed:</td>
+                      <td>King Beds</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Services:</td>
+                      <td>Wifi, Television, Bathroom,...</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a href="#" class="primary-btn">More Details</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="hp-room-item set-bg" data-setbg="./benchmark/img/room/room-b2.jpg" style="background-image: url('./benchmark/img/room/room-b2.jpg');">
+              <div class="hr-text">
+                <h3>Premium King Room</h3>
+                <h2 class="pb-5">159$<span>/Pernight</span></h2>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td class="r-o">Size:</td>
+                      <td>30 ft</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Capacity:</td>
+                      <td>Max persion 5</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Bed:</td>
+                      <td>King Beds</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Services:</td>
+                      <td>Wifi, Television, Bathroom,...</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a href="#" class="primary-btn">More Details</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="hp-room-item set-bg" data-setbg="./benchmark/img/room/room-b3.jpg" style="background-image: url('./benchmark/img/room/room-b3.jpg');">
+              <div class="hr-text">
+                <h3>Deluxe Room</h3>
+                <h2 class="pb-5">198$<span>/Pernight</span></h2>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td class="r-o">Size:</td>
+                      <td>30 ft</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Capacity:</td>
+                      <td>Max persion 5</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Bed:</td>
+                      <td>King Beds</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Services:</td>
+                      <td>Wifi, Television, Bathroom,...</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a href="#" class="primary-btn">More Details</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="hp-room-item set-bg" data-setbg="./benchmark/img/room/room-b4.jpg" style="background-image: url('./benchmark/img/room/room-b4.jpg');">
+              <div class="hr-text">
+                <h3>Family Room</h3>
+                <h2 class="pb-5">299$<span>/Pernight</span></h2>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td class="r-o">Size:</td>
+                      <td>30 ft</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Capacity:</td>
+                      <td>Max persion 5</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Bed:</td>
+                      <td>King Beds</td>
+                    </tr>
+                    <tr>
+                      <td class="r-o">Services:</td>
+                      <td>Wifi, Television, Bathroom,...</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a href="#" class="primary-btn">More Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Room Section End -->
+
+  <!-- Introduction Text Section Begin -->
+  <section class="intro-text-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-title">
+            <span>Our Commitment</span>
+            <h2>Excellence in Every Detail</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="intro-text-content">
+            <p>At our establishment, we believe that exceptional service and attention to detail create unforgettable experiences. Our commitment to excellence has earned us recognition from guests worldwide, who consistently praise our dedication to providing the highest standards of hospitality and comfort.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <div class="intro-cta-container">
+            <a href="#" class="intro-cta-btn">Discover More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Introduction Text Section End -->
+
+  <!-- Testimonial Section Begin -->
+  <section class="testimonial-section spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-title">
+            <span>Testimonials</span>
+            <h2>What Customers Say?</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0"
+                  class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"
+                  aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"
+                  aria-label="Slide 3"></button>
+              <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="3"
+                  aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="ts-item">
+                  <p>After a construction project took longer than expected, my husband, my daughter
+                      and I
+                      needed a place to stay for a few nights. As a Chicago resident, we know a lot
+                      about our
+                      city, neighborhood and the types of housing options available and absolutely
+                      love our
+                      vacation at Sona Hotel.</p>
+                  <div class="ti-author">
+                    <div class="rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <h5> - Alexander Vasquez</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="ts-item">
+                  <p>The service at Sona Hotel was absolutely exceptional. From the moment we arrived,
+                      the staff went above and beyond to make our stay memorable. The rooms were
+                      beautifully appointed and the amenities were top-notch. Highly recommended!</p>
+                  <div class="ti-author">
+                    <div class="rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                    <h5> - Sarah Johnson</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="ts-item">
+                  <p>We had an amazing family vacation at Sona Hotel. The kids loved the pool area
+                      and the family-friendly activities. The location was perfect for exploring the
+                      city,
+                      and the concierge service helped us plan the best itinerary. Will definitely
+                      return!</p>
+                  <div class="ti-author">
+                    <div class="rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                    <h5> - Michael Chen</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="ts-item">
+                  <p>The attention to detail at Sona Hotel is remarkable. Every aspect of our stay
+                      was carefully thought out, from the luxurious bedding to the gourmet dining
+                      options.
+                      This is truly a world-class establishment that exceeds expectations.</p>
+                  <div class="ti-author">
+                    <div class="rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                    <h5> - Emily Rodriguez</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Testimonial Section End -->
+
+  <!-- Footer Section Begin -->
+  <footer class="footer-section">
+    <div class="container">
+      <div class="footer-text">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="ft-about">
+              <div class="logo">
+                <a href="#">
+                  <img src="img/footer-logo.png" alt="">
+                </a>
+              </div>
+              <p>We inspire and reach millions of travelers<br> across 90 local websites</p>
+              <div class="fa-social">
+                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 offset-lg-1">
+            <div class="ft-contact">
+              <h6> Contact Us</h6>
+              <ul>
+                <li><i class="fas fa-phone-alt"></i> (12) 345 67890</li>
+                <li><i class="fas fa-envelope"></i> info.colorlib@gmail.com</li>
+                <li><i class="fas fa-map-marker-alt"></i> 856 Cordia Extension Apt. 356, Lake, United
+                  State</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 offset-lg-1">
+            <div class="ft-newslatter">
+              <h6> New latest</h6>
+              <p><i class="fas fa-bell"></i> Get the latest updates and offers.</p>
+              <form action="#" class="fn-form">
+                <input type="text" placeholder="Email">
+                <button type="submit"><i class="fas fa-paper-plane"></i></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright-option">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7">
+            <ul>
+              <li><a href="#"><i class="fas fa-file-contract"></i> Terms of use</a></li>
+              <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy</a></li>
+              <li><a href="#"><i class="fas fa-leaf"></i> Environmental Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-5">
+            <div class="co-text">
+              <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright ©
+                <script>document.write(new Date().getFullYear());</script> All rights reserved | <a
+                  href="https://nexgenai.asia/" target="_blank"
+                  style="text-decoration: none;">nexgenai.asia</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer Section End -->
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Chatbot JS -->
+  <script src="chatbot/chatbot.js"></script>
+
+  <!-- Floating Chatbot -->
+  <div id="floating-chatbot" class="chatbot-container">
+    <!-- Chatbot Toggle Button -->
+    <div id="chatbot-toggle" class="chatbot-toggle">
+      <div class="chatbot-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </div>
+      <div class="chatbot-notification" id="chatbot-notification">1</div>
+    </div>
+
+    <!-- Chatbot Window -->
+    <div id="chatbot-window" class="chatbot-window">
+      <!-- Chatbot Header -->
+      <div class="chatbot-header">
+        <div class="chatbot-header-content">
+          <div class="chatbot-avatar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div class="chatbot-info">
+            <h4>Real Estate Assistant</h4>
+            <span class="chatbot-status">Online</span>
+          </div>
+        </div>
+        <button id="chatbot-close" class="chatbot-close">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Chatbot Messages -->
+      <div class="chatbot-messages" id="chatbot-messages">
+        <div class="message bot-message">
+          <div class="message-avatar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div class="message-content">
+            <p>Hello! I'm your real estate assistant. How can I help you today?</p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Chatbot Input -->
+      <div class="chatbot-input-container">
+        <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Type your message..." />
+        <button id="chatbot-send" class="chatbot-send">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22,2 15,22 11,13 2,9 22,2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function scrollToDemo(event) {
+      event.preventDefault();
+      document.querySelector('#demo').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+
+</html>

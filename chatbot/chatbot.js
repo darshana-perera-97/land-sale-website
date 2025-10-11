@@ -4,7 +4,8 @@ class FloatingChatbot {
     this.isOpen = false;
     this.messages = [];
     this.sessionId = this.generateSessionId();
-    this.apiUrl = 'http://localhost:3000/api/chatbot';
+    this.apiUrl = 'https://landsale-backend.nexgenai.asia/api/chatbot';
+    // this.apiUrl = 'http://localhost:3000/api/chatbot';   https://landsale-backend.nexgenai.asia/api/health
     this.init();
   }
 
