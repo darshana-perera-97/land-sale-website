@@ -4,7 +4,7 @@ class FloatingChatbot {
     this.isOpen = false;
     this.messages = [];
     this.sessionId = this.generateSessionId();
-    this.apiUrl = 'http://localhost:3000/api/chatbot';
+    this.apiUrl = 'http://localhost:5000/api/chatbot';
     this.init();
   }
 

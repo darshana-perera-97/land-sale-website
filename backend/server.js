@@ -5,7 +5,7 @@ const path = require('path');
 const OpenAI = require('openai');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // Initialize OpenAI client
 const openai = new OpenAI({
@@ -273,7 +273,7 @@ app.listen(PORT, () => {
   console.log('📝 Logging: ENABLED');
   console.log('='.repeat(60));
   console.log('💡 Tips:');
-  console.log('   • Open http://localhost:3000 in your browser');
+  console.log(`   • Open http://localhost:${PORT} in your browser`);
   console.log('   • Check terminal for real-time message logs');
   console.log('   • Press Ctrl+C to stop the server');
   console.log('='.repeat(60) + '\n');
