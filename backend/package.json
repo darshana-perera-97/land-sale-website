@@ -1,7 +1,7 @@
 {
   "name": "land-sale-website-backend",
   "version": "1.0.0",
-  "description": "Backend for land sale website with chatbot functionality",
+  "description": "Backend for ALRAS REAL ESTATE website with chatbot functionality",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

@@ -34,7 +34,9 @@ async function getChatGPTResponse(userMessage, sessionId) {
       messages: [
         {
           role: "system",
-          content: `You are a real estate chatbot assistant. Provide SHORT, SIMPLE answers (1-2 sentences max). Be helpful but brief. Always offer to connect with agents or schedule viewings when relevant.
+          content: `You are a real estate chatbot assistant for ALRAS REAL ESTATE. Provide SHORT, SIMPLE answers (1-2 sentences max). Be helpful but brief. Always offer to connect with agents or schedule viewings when relevant.
+
+COMPANY: ALRAS REAL ESTATE - Premium Real Estate Solutions
 
 AVAILABLE PROPERTIES:
 
@@ -58,8 +60,9 @@ HOME PROPERTIES:
 When users ask about properties, mention specific ones with prices and discounts.
 
 CONTACT DETAILS:
-- Email: support@nexgenai.asia
-- Phone: +94 71 66 96 196
+- Email: info@alrasservices.com
+- Phone: +971 508775526
+- Location: Dubai, Ras Al Khaimah, UAE
 
 Always offer to connect users with our team for viewings or more information.`
         },
@@ -84,7 +87,7 @@ Always offer to connect users with our team for viewings or more information.`
       'hello': 'Hello! How can I help you with your real estate needs today?',
       'hi': 'Hi there! I\'m here to assist you with property inquiries, scheduling viewings, or any real estate questions.',
       'properties': 'I can help you find properties! What type of property are you looking for?',
-      'contact': 'You can contact our team at support@nexgenai.asia or call +94 71 66 96 196.',
+      'contact': 'You can contact our team at info@alrasservices.com or call +971 508775526.',
       'schedule': 'I\'d be happy to help you schedule a viewing! Which property interests you?',
       'default': 'Thank you for your message! I\'m here to help with property inquiries. How can I assist you?'
     };

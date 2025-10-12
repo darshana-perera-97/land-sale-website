@@ -1,6 +1,6 @@
-# Chatbot Backend
+# ALRAS REAL ESTATE Chatbot Backend
 
-Node.js backend server for the real estate chatbot functionality.
+Node.js backend server for the ALRAS REAL ESTATE chatbot functionality.
 
 ## Features
 
@@ -29,7 +29,7 @@ Send a message to the chatbot.
 ```json
 {
   "success": true,
-  "response": "Hello! How can I help you with your real estate needs today?",
+  "response": "Hello! How can I help you with your ALRAS REAL ESTATE needs today?",
   "sessionId": "session_1234567890_abc123",
   "timestamp": "2024-01-01T12:00:00.000Z",
   "matchedKeyword": "hello"
@@ -88,7 +88,7 @@ Health check endpoint.
   "status": "OK",
   "timestamp": "2024-01-01T12:00:00.000Z",
   "uptime": 3600,
-  "message": "Chatbot backend is running"
+  "message": "ALRAS REAL ESTATE chatbot backend is running"
 }
 ```
 
