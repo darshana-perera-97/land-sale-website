@@ -403,7 +403,32 @@
         padding-left: 30px;
         padding-right: 20px;
       }
+
+      /* Hide About Us section images on mobile */
+      .about-pic {
+        display: none;
+      }
+
+      /* Show mobile Why Choose Us section only on mobile */
+      .why-choose-mobile {
+        display: block;
+      }
+
+      /* Hide desktop Why Choose Us section on mobile */
+      .why-choose-desktop {
+        display: none;
+      }
     }
+
+    /* Show desktop Why Choose Us section only on large screens */
+    @media (min-width: 769px) {
+      .why-choose-mobile {
+        display: none;
+      }
+
+      .why-choose-desktop {
+        display: block;
+      }
   </style>
 </head>
 
@@ -529,7 +554,7 @@
   <!-- About Us Section End -->
 
   <!-- Why Choose Us Section Begin -->
-  <section id="why-choose" class="why-choose-us-section spad">
+  <section id="why-choose" class="why-choose-us-section spad why-choose-desktop">
     <div class="container">
       <div class="row">
         <!-- First Block - Title Only -->
@@ -827,6 +852,112 @@
     </div>
   </section>
   <!-- Properties Section End -->
+
+  <!-- Why Choose Us mobile Section Begin --> 
+  <section id="why-choose" class="why-choose-us-section spad why-choose-mobile">
+    <div class="container">
+      <div class="row">
+        <!-- First Block - Title Only -->
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="why-choose-intro">
+            <div class="intro-content">
+              <span class="intro-subtitle">WHY CHOOSE US.</span>
+              <h2 class="intro-title">Making living spaces affordable</h2>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature Cards -->
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="why-choose-card">
+            <div class="card-number">01</div>
+            <div class="card-icon">
+              <img src="./Assets/residential.png" alt="High Quality Properties" class="card-icon-img">
+            </div>
+            <div class="card-content">
+              <h4>Property Leasing </h4>
+              <p>Curated residential and
+                commercial spaces designed for
+                your lifestyle and business.
+                From sky-high penthouses to
+                strategic retail locations,
+                experience Dubai's best. </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="why-choose-card">
+            <div class="card-number">02</div>
+            <div class="card-icon">
+              <img src="./Assets/businessman.png" alt="Comprehensive Amenities" class="card-icon-img">
+            </div>
+            <div class="card-content">
+              <h4>Labour & Staff
+                Accommodation </h4>
+              <p>We redefine workforce housing.
+                Discover compliant, safe, and
+                productive living environments
+                for your teams, managed with
+                precision and care.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="why-choose-card">
+            <div class="card-number">03</div>
+            <div class="card-icon">
+              <img src="./Assets/amenities.png" alt="Professional Services" class="card-icon-img">
+            </div>
+            <div class="card-content">
+              <h4>Land & Investment </h4>
+              <p>Unlock the future of Dubai. We
+                provide exclusive access and
+                data-driven advisory for strategic
+                land acquisition and
+                development projects.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="why-choose-card">
+            <div class="card-number">04</div>
+            <div class="card-icon">
+              <img src="./Assets/renewable-energy.png" alt="Green and Clean Environment" class="card-icon-img">
+            </div>
+            <div class="card-content">
+              <h4>Professional Brokerage</h4>
+              <p>At the heart of every successful
+                transaction is an advisor you
+                trust. Our RERA-certified
+                brokerage provides end-to-end
+                advisory, combining market
+                intelligence with a relentless
+                focus on your goals for results
+                that exceed expectations.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="why-choose-card">
+            <div class="card-number">05</div>
+            <div class="card-icon">
+              <img src="./Assets/target-market.png" alt="Community Focus" class="card-icon-img">
+            </div>
+            <div class="card-content">
+              <h4>Apartment Rental </h4>
+              <p>Our team of RERA-certified
+                professionals acts as your
+                dedicated partner, providing
+                comprehensive advisory from
+                the first viewing to the final
+                signature.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Why Choose Us mobile Section End -->
 
   <!-- Introduction Text Section Begin -->
   <section class="intro-text-section">
