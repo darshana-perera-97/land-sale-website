@@ -381,7 +381,7 @@
     /* Mobile Logo Display */
     .mobile-logo {
       display: none;
-      
+
     }
 
     .desktop-logo {
@@ -393,7 +393,7 @@
         display: block;
         margin-right: 25px;
       }
-      
+
       .desktop-logo {
         display: none;
       }
@@ -489,8 +489,8 @@
           <div class="hero-content">
             <img src="./Assets/SiteLogo.png" alt="ALRAS REAL ESTATE Logo" class="hero-logo" decoding="async" />
             <h1 class="hero-title px-4">
-              <!-- <span class="title-line-1">ALRAS REAL ESTATE</span> -->
-              <span class="title-line-2">Premium Real Estate Solutions</span>
+              <span class="title-line-1">Most Trusted</span>
+              <span class="title-line-2">Real Estate Company in Dubai</span>
             </h1>
 
             <!-- AI Search Section -->
@@ -854,7 +854,7 @@
   </section>
   <!-- Properties Section End -->
 
-  <!-- Why Choose Us mobile Section Begin --> 
+  <!-- Why Choose Us mobile Section Begin -->
   <section id="why-choose" class="why-choose-us-section spad why-choose-mobile">
     <div class="container">
       <div class="row">
@@ -1395,7 +1395,7 @@
     const popupApiUrl = 'https://alras.nexgenai.asia/api/chatbot';
     // const popupApiUrl = 'http://localhost:3001/api/chatbot';
     // const popupApiUrl = 'https://landsale-backend.nexgenai.asia/api/chatbot';
-    
+
     // Popup conversation flow tracking
     let popupConversationStage = 'questions';
     let popupQuestionCount = 0;
@@ -1434,7 +1434,7 @@
             hidePopupTypingIndicator();
             if (data.success) {
               addPopupMessage(data.response);
-              
+
               // Update conversation state from backend response
               if (data.conversationStage) {
                 popupConversationStage = data.conversationStage;
@@ -1512,7 +1512,7 @@
           hidePopupTypingIndicator();
           if (data.success) {
             addPopupMessage(data.response);
-            
+
             // Update conversation state from backend response
             if (data.conversationStage) {
               popupConversationStage = data.conversationStage;
@@ -1549,7 +1549,7 @@
 
       messagesContainer.appendChild(messageDiv);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      
+
       // Check if we need to add action buttons
       if (!isUser) {
         addPopupActionButtons(content);
@@ -1561,12 +1561,12 @@
       if (messageText.includes('Would you like to schedule a viewing or get more information')) {
         const actionDiv = document.createElement('div');
         actionDiv.className = 'chatbot-popup-action-buttons';
-        
+
         const actions = [
           // { text: 'Schedule Viewing', action: 'schedule_viewing' },
           // { text: 'Get More Information', action: 'more_details' }
         ];
-        
+
         actions.forEach(action => {
           const button = document.createElement('button');
           button.className = 'chatbot-popup-action-btn';
@@ -1578,19 +1578,19 @@
           });
           actionDiv.appendChild(button);
         });
-        
+
         const messagesContainer = document.getElementById('chatbot-popup-messages');
         messagesContainer.appendChild(actionDiv);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
       }
-      
+
       // Contact form functionality removed - no longer showing contact form
     }
 
     function handlePopupFlowAction(action) {
       let responseMessage = '';
-      
-      switch(action) {
+
+      switch (action) {
         case 'more_details':
           responseMessage = 'I would like to get more information';
           break;
@@ -1598,7 +1598,7 @@
           responseMessage = 'Let\'s schedule time';
           break;
       }
-      
+
       addPopupMessage(responseMessage, true);
       sendPopupMessageToBackend(responseMessage);
     }
@@ -1617,12 +1617,12 @@
             sessionId: popupSessionId
           })
         });
-        
+
         const data = await response.json();
-        
+
         if (data.success) {
           addPopupMessage(data.response);
-          
+
           // Update conversation state from backend response
           if (data.conversationStage) {
             popupConversationStage = data.conversationStage;
