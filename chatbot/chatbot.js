@@ -7,6 +7,8 @@ class FloatingChatbot {
     this.apiUrl = 'http://localhost:3000/api/chatbot';
     // this.apiUrl = 'https://landsale-backend.nexgenai.asia/api/chatbot';
     // this.apiUrl = 'http://localhost:3000/api/chatbot';   https://landsale-backend.nexgenai.asia/api/health
+    this.conversationStage = 'questions';
+    this.questionCount = 0;
     this.init();
   }
 
@@ -134,6 +136,15 @@ class FloatingChatbot {
       
       if (data.success) {
         this.addMessage(data.response);
+        
+        // Update conversation state from backend response
+        if (data.conversationStage) {
+          this.conversationStage = data.conversationStage;
+        }
+        if (data.questionCount !== undefined) {
+          this.questionCount = data.questionCount;
+        }
+        
         // Check if we need to add action buttons based on response
         this.addActionButtons(data.response);
       } else {
@@ -281,12 +292,7 @@ class FloatingChatbot {
       this.scrollToBottom();
     }
     
-    // Check if we need to show contact form (when agent Suno is mentioned)
-    if (messageText.includes('agent Suno') || messageText.includes('contact number or email address')) {
-      setTimeout(() => {
-        this.showContactForm();
-      }, 1000);
-    }
+    // Contact form functionality removed - no longer showing contact form
   }
 
   handleFlowAction(action) {
@@ -305,74 +311,7 @@ class FloatingChatbot {
     this.sendMessageToBackend(responseMessage);
   }
 
-  showContactForm() {
-    const contactFormDiv = document.createElement('div');
-    contactFormDiv.className = 'contact-form-message';
-    contactFormDiv.innerHTML = `
-      <div class="contact-form">
-        <h4>Please provide your contact number or email address:</h4>
-        <form id="contact-form">
-          <div class="form-group">
-            <input type="tel" id="contact-phone" placeholder="Your Phone Number" required>
-          </div>
-          <div class="form-group">
-            <input type="email" id="contact-email" placeholder="Your Email Address" required>
-          </div>
-          <div class="form-group">
-            <input type="text" id="contact-name" placeholder="Your Name (Optional)">
-          </div>
-          <button type="submit" class="contact-submit-btn">Submit Contact Information</button>
-        </form>
-      </div>
-    `;
-    
-    this.messagesContainer.appendChild(contactFormDiv);
-    this.scrollToBottom();
-    
-    // Bind form submission
-    const form = contactFormDiv.querySelector('#contact-form');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.submitContactForm(form);
-    });
-  }
-
-  async submitContactForm(form) {
-    const formData = new FormData(form);
-    const contactData = {
-      name: form.querySelector('#contact-name').value,
-      email: form.querySelector('#contact-email').value,
-      phone: form.querySelector('#contact-phone').value,
-      property: form.querySelector('#contact-property').value,
-      sessionId: this.sessionId
-    };
-    
-    try {
-      const response = await fetch(`${this.apiUrl}/contact`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(contactData)
-      });
-      
-      const data = await response.json();
-      
-      if (data.success) {
-        this.addMessage(data.message);
-        // Remove the contact form
-        const contactForm = document.querySelector('.contact-form-message');
-        if (contactForm) {
-          contactForm.remove();
-        }
-      } else {
-        this.addMessage('Sorry, there was an error submitting your information. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error submitting contact form:', error);
-      this.addMessage('Sorry, there was an error submitting your information. Please try again.');
-    }
-  }
+  // Contact form functionality removed
 
   async sendMessageToBackend(message) {
     try {
@@ -391,6 +330,15 @@ class FloatingChatbot {
       
       if (data.success) {
         this.addMessage(data.response);
+        
+        // Update conversation state from backend response
+        if (data.conversationStage) {
+          this.conversationStage = data.conversationStage;
+        }
+        if (data.questionCount !== undefined) {
+          this.questionCount = data.questionCount;
+        }
+        
         // Check if we need to add action buttons
         this.addActionButtons(data.response);
       } else {

@@ -29,17 +29,26 @@ async function getChatGPTResponse(userMessage, sessionId) {
   try {
     console.log(`   🤖 Calling ChatGPT API for: "${userMessage}"`);
     
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "system",
-          content: `You are a real estate chatbot assistant for ALRAS REAL ESTATE. Follow this EXACT conversation flow:
+    // Initialize session data if it doesn't exist
+    if (!sessionData[sessionId]) {
+      sessionData[sessionId] = {
+        questionCount: 0,
+        userName: null,
+        userContact: null,
+        conversationStage: 'questions', // 'questions', 'name', 'contact', 'continue'
+        conversationHistory: [] // Store actual conversation messages
+      };
+    }
+    
+    const session = sessionData[sessionId];
+    let systemPrompt = '';
+    
+    // Determine conversation stage and create appropriate prompt
+    if (session.conversationStage === 'questions' && session.questionCount < 4) {
+      // First 4 questions - provide answers
+      systemPrompt = `You are a real estate chatbot assistant for ALRAS REAL ESTATE. 
 
-CONVERSATION FLOW:
-1. FIRST: Provide property data with investment focus
-2. SECOND: Ask "Would you like to schedule a viewing or get more information?"
-3. THIRD: If they choose schedule, say "Perfect. Right away you'll connect to our real Estate agent Suno. Please Provide your contact number or email address."
+CONVERSATION STAGE: Answering questions (Question ${session.questionCount + 1} of 4)
 
 COMPANY: ALRAS REAL ESTATE - Premium Real Estate Solutions
 
@@ -62,20 +71,91 @@ HOME PROPERTIES:
 7. Dubai Marina Apartment - AED 1,800,000 (7% discount) - Keywords: waterfront, luxury, modern - 2BR marina view apartment
 8. Jumeirah Villa - AED 6,500,000 (6% discount) - Keywords: beach, luxury, traditional - 4BR traditional beach villa
 
-RESPONSE EXAMPLES:
-- For investment queries: "For a great investment opportunity in Dubai, consider the Business Bay Apartment priced at AED 1,200,000 with a 7% High ROI. It's a modern 1BR apartment perfect for investment purposes. Would you like to schedule a viewing or get more information?"
-- For scheduling: "Perfect. Right away you'll connect to our real Estate agent Suno. Please Provide your contact number or email address."
+INSTRUCTIONS: Provide helpful answers about properties, pricing, locations, or real estate services. Be informative and engaging. After answering, wait for the next question.`;
+      
+    } else if (session.conversationStage === 'questions' && session.questionCount >= 4) {
+      // After 4 questions, ask for name
+      systemPrompt = `You are a real estate chatbot assistant for ALRAS REAL ESTATE.
+
+CONVERSATION STAGE: Collecting user information
+
+INSTRUCTIONS: The user has asked 4 questions. Now ask for their name to continue the conversation. Be friendly and professional.
+
+RESPONSE: "I'd be happy to help you further. Could you please tell me your name so I can assist you better?"`;
+      
+    } else if (session.conversationStage === 'name') {
+      // After getting name, ask for contact number
+      systemPrompt = `You are a real estate chatbot assistant for ALRAS REAL ESTATE.
+
+CONVERSATION STAGE: Collecting contact information
+
+USER NAME: ${session.userName}
+
+INSTRUCTIONS: The user has provided their name. Now ask for their contact number. Be friendly and professional.
+
+RESPONSE: "Nice to meet you, ${session.userName}! Could you please provide your contact number?"`;
+      
+    } else if (session.conversationStage === 'contact') {
+      // After getting contact, continue normal conversation with context
+      const recentQuestions = session.conversationHistory ? 
+        session.conversationHistory.slice(-4).map(msg => msg.content).join(', ') : 
+        'No previous questions recorded';
+      
+      systemPrompt = `You are a real estate chatbot assistant for ALRAS REAL ESTATE.
+
+CONVERSATION STAGE: Continuing conversation with user details
+
+USER INFO: Name - ${session.userName}, Contact - ${session.userContact}
+
+CONVERSATION HISTORY: The user has asked ${session.questionCount} questions about real estate properties and services. Their recent questions were: ${recentQuestions}
+
+INSTRUCTIONS: 
+- Acknowledge that you now have their contact information
+- Continue the conversation naturally, referencing their previous questions if relevant
+- Be personalized and friendly, using their name when appropriate
+- You can provide property information, schedule viewings, or answer any real estate questions
+- Offer to connect them with our real estate agent Suno for further assistance
+- Be helpful and professional
 
 AGENT NAME: Suno
 
-Always follow this exact pattern and use the agent name "Suno" when scheduling.`
+AVAILABLE PROPERTIES:
+
+LAND PROPERTIES:
+1. Dubai Hills Estate Land - AED 2,500,000 (7% discount) - Keywords: luxury, golf, family - Prime location with golf course views
+2. Business Bay Plot - AED 1,800,000 (5% discount) - Keywords: commercial, downtown, investment - Commercial development opportunity
+3. Jumeirah Village Land - AED 1,200,000 (5% discount) - Keywords: residential, affordable, growth - Upcoming residential area
+4. Dubai Marina Plot - AED 3,200,000 (7% discount) - Keywords: waterfront, luxury, premium - Waterfront development land
+5. Arabian Ranches Land - AED 2,800,000 (8% discount) - Keywords: villa, family, community - Villa community development
+
+HOME PROPERTIES:
+1. Downtown Dubai Apartment - AED 1,500,000 (7% discount) - Keywords: luxury, city, views - 2BR apartment with city views
+2. Palm Jumeirah Villa - AED 8,500,000 (8% discount) - Keywords: beachfront, luxury, villa - 5BR beachfront villa
+3. Dubai Hills Villa - AED 3,200,000 (6% discount) - Keywords: golf, family, modern - 4BR villa with golf course access
+4. Business Bay Apartment - AED 1,200,000 (7% High ROI) - Keywords: commercial, modern, investment - 1BR modern apartment
+5. JBR Apartment - AED 2,100,000 (7% discount) - Keywords: beach, luxury, rental - 2BR beachfront apartment
+6. Arabian Ranches Villa - AED 2,800,000 (6% discount) - Keywords: family, community, spacious - 3BR family villa
+7. Dubai Marina Apartment - AED 1,800,000 (7% discount) - Keywords: waterfront, luxury, modern - 2BR marina view apartment
+8. Jumeirah Villa - AED 6,500,000 (6% discount) - Keywords: beach, luxury, traditional - 4BR traditional beach villa
+
+EXAMPLE RESPONSES:
+- "Thank you for providing your contact information, ${session.userName}! Now that I have your details, I can better assist you with your real estate needs. Based on our previous conversation, would you like me to provide more specific information about any properties that interest you?"
+- "Perfect! I have your contact details now, ${session.userName}. I can connect you with our real estate agent Suno who can provide personalized assistance based on your requirements. Would you like to schedule a viewing or get more detailed information about any specific properties?"`;
+    }
+    
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "system",
+          content: systemPrompt
         },
         {
           role: "user",
           content: userMessage
         }
       ],
-      max_tokens: 120,
+      max_tokens: 150,
       temperature: 0.7,
     });
 
@@ -114,6 +194,9 @@ Always follow this exact pattern and use the agent name "Suno" when scheduling.`
 // Chat history storage (in production, use a database)
 let chatHistory = [];
 
+// Session tracking for conversation flow
+let sessionData = {};
+
 // Routes
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
@@ -137,8 +220,67 @@ app.post('/api/chatbot/message', async (req, res) => {
       });
     }
 
+    // Initialize session data if it doesn't exist
+    if (!sessionData[sessionId]) {
+      sessionData[sessionId] = {
+        questionCount: 0,
+        userName: null,
+        userContact: null,
+        conversationStage: 'questions',
+        conversationHistory: [] // Store actual conversation messages
+      };
+    }
+
+    const session = sessionData[sessionId];
+    
+    // Ensure conversationHistory exists
+    if (!session.conversationHistory) {
+      session.conversationHistory = [];
+    }
+    
+    // Store user message in conversation history
+    session.conversationHistory.push({
+      role: 'user',
+      content: message,
+      timestamp: new Date().toISOString()
+    });
+    
+    // Handle conversation flow logic
+    if (session.conversationStage === 'questions' && session.questionCount < 4) {
+      // Count this as a question
+      session.questionCount++;
+      console.log(`   📊 Question count: ${session.questionCount}/4`);
+      
+    } else if (session.conversationStage === 'questions' && session.questionCount >= 4) {
+      // After 4 questions, move to name collection stage
+      session.conversationStage = 'name';
+      console.log(`   🔄 Moving to name collection stage`);
+      
+    } else if (session.conversationStage === 'name') {
+      // Store the name and move to contact collection
+      session.userName = message.trim();
+      session.conversationStage = 'contact';
+      console.log(`   👤 Name collected: ${session.userName}`);
+      
+    } else if (session.conversationStage === 'contact') {
+      // Store the contact and move to continue stage
+      session.userContact = message.trim();
+      session.conversationStage = 'continue';
+      console.log(`   📞 Contact collected: ${session.userContact}`);
+    }
+
     // Get ChatGPT response
     const response = await getChatGPTResponse(message, sessionId);
+
+    // Store bot response in conversation history
+    if (!session.conversationHistory) {
+      session.conversationHistory = [];
+    }
+    session.conversationHistory.push({
+      role: 'assistant',
+      content: response,
+      timestamp: new Date().toISOString()
+    });
 
     // Store chat history
     const chatEntry = {
@@ -147,7 +289,9 @@ app.post('/api/chatbot/message', async (req, res) => {
       userMessage: message,
       botResponse: response,
       matchedKeyword: 'chatgpt',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      conversationStage: session.conversationStage,
+      questionCount: session.questionCount
     };
     
     chatHistory.push(chatEntry);
@@ -161,6 +305,7 @@ app.post('/api/chatbot/message', async (req, res) => {
     console.log(`   🔍 Processing: "${message}"`);
     console.log(`   🎯 Response source: ChatGPT API`);
     console.log(`   💬 Response: "${response}"`);
+    console.log(`   📈 Stage: ${session.conversationStage}, Questions: ${session.questionCount}`);
 
     // Simulate typing delay
     setTimeout(() => {
@@ -170,7 +315,9 @@ app.post('/api/chatbot/message', async (req, res) => {
         response: response,
         sessionId: sessionId,
         timestamp: chatEntry.timestamp,
-        matchedKeyword: 'chatgpt'
+        matchedKeyword: 'chatgpt',
+        conversationStage: session.conversationStage,
+        questionCount: session.questionCount
       });
     }, 1000 + Math.random() * 1000); // 1-2 second delay
 
