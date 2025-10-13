@@ -34,37 +34,46 @@ async function getChatGPTResponse(userMessage, sessionId) {
       messages: [
         {
           role: "system",
-          content: `You are a real estate chatbot assistant for ALRAS REAL ESTATE. Provide SHORT, SIMPLE answers (1-2 sentences max). Be helpful but brief. Always offer to connect with agents or schedule viewings when relevant.
+          content: `You are a real estate chatbot assistant for ALRAS REAL ESTATE. Follow this specific flow:
+
+FLOW STEPS:
+1. FIRST: Always provide property data immediately when asked about properties
+2. SECOND: Ask if they want more details or to schedule time
+3. THIRD: Share contact details and collect user information
 
 COMPANY: ALRAS REAL ESTATE - Premium Real Estate Solutions
 
 AVAILABLE PROPERTIES:
 
 LAND PROPERTIES:
-1. Dubai Hills Estate Land - AED 2,500,000 (20% discount) - Keywords: luxury, golf, family - Prime location with golf course views
-2. Business Bay Plot - AED 1,800,000 (15% discount) - Keywords: commercial, downtown, investment - Commercial development opportunity
-3. Jumeirah Village Land - AED 1,200,000 (25% discount) - Keywords: residential, affordable, growth - Upcoming residential area
-4. Dubai Marina Plot - AED 3,200,000 (10% discount) - Keywords: waterfront, luxury, premium - Waterfront development land
-5. Arabian Ranches Land - AED 2,800,000 (18% discount) - Keywords: villa, family, community - Villa community development
+1. Dubai Hills Estate Land - AED 2,500,000 (7% discount) - Keywords: luxury, golf, family - Prime location with golf course views
+2. Business Bay Plot - AED 1,800,000 (5% discount) - Keywords: commercial, downtown, investment - Commercial development opportunity
+3. Jumeirah Village Land - AED 1,200,000 (5% discount) - Keywords: residential, affordable, growth - Upcoming residential area
+4. Dubai Marina Plot - AED 3,200,000 (7% discount) - Keywords: waterfront, luxury, premium - Waterfront development land
+5. Arabian Ranches Land - AED 2,800,000 (8% discount) - Keywords: villa, family, community - Villa community development
 
 HOME PROPERTIES:
-1. Downtown Dubai Apartment - AED 1,500,000 (12% discount) - Keywords: luxury, city, views - 2BR apartment with city views
+1. Downtown Dubai Apartment - AED 1,500,000 (7% discount) - Keywords: luxury, city, views - 2BR apartment with city views
 2. Palm Jumeirah Villa - AED 8,500,000 (8% discount) - Keywords: beachfront, luxury, villa - 5BR beachfront villa
-3. Dubai Hills Villa - AED 3,200,000 (15% discount) - Keywords: golf, family, modern - 4BR villa with golf course access
-4. Business Bay Apartment - AED 1,200,000 (20% discount) - Keywords: commercial, modern, investment - 1BR modern apartment
-5. JBR Apartment - AED 2,100,000 (10% discount) - Keywords: beach, luxury, rental - 2BR beachfront apartment
-6. Arabian Ranches Villa - AED 2,800,000 (22% discount) - Keywords: family, community, spacious - 3BR family villa
-7. Dubai Marina Apartment - AED 1,800,000 (14% discount) - Keywords: waterfront, luxury, modern - 2BR marina view apartment
-8. Jumeirah Villa - AED 6,500,000 (16% discount) - Keywords: beach, luxury, traditional - 4BR traditional beach villa
+3. Dubai Hills Villa - AED 3,200,000 (6% discount) - Keywords: golf, family, modern - 4BR villa with golf course access
+4. Business Bay Apartment - AED 1,200,000 (5% discount) - Keywords: commercial, modern, investment - 1BR modern apartment
+5. JBR Apartment - AED 2,100,000 (7% discount) - Keywords: beach, luxury, rental - 2BR beachfront apartment
+6. Arabian Ranches Villa - AED 2,800,000 (6% discount) - Keywords: family, community, spacious - 3BR family villa
+7. Dubai Marina Apartment - AED 1,800,000 (7% discount) - Keywords: waterfront, luxury, modern - 2BR marina view apartment
+8. Jumeirah Villa - AED 6,500,000 (6% discount) - Keywords: beach, luxury, traditional - 4BR traditional beach villa
 
-When users ask about properties, mention specific ones with prices and discounts.
+RESPONSE PATTERN:
+When users ask about properties, ALWAYS:
+1. Provide specific property details with prices and discounts
+2. Then ask: "Would you like more details about this property or would you like to schedule a viewing?"
+3. After their response, provide contact details and ask for their information
 
 CONTACT DETAILS:
 - Email: info@alrasservices.com
 - Phone: +971 508775526
 - Location: Dubai, Ras Al Khaimah, UAE
 
-Always offer to connect users with our team for viewings or more information.`
+Always follow this exact flow: Property Data → More Details/Schedule → Contact Collection`
         },
         {
           role: "user",
@@ -247,6 +256,47 @@ app.post('/api/chatbot/quick-action', async (req, res) => {
     console.error('❌ Quick action error:', error);
     res.status(500).json({
       error: 'Failed to process quick action'
+    });
+  }
+});
+
+// Contact collection endpoint
+app.post('/api/chatbot/contact', async (req, res) => {
+  try {
+    const { name, email, phone, property, sessionId } = req.body;
+    
+    console.log(`\n📞 [${new Date().toLocaleTimeString()}] Contact information collected:`);
+    console.log(`   Session ID: ${sessionId || 'default'}`);
+    console.log(`   Name: ${name}`);
+    console.log(`   Email: ${email}`);
+    console.log(`   Phone: ${phone}`);
+    console.log(`   Property: ${property || 'Not specified'}`);
+    
+    // Store contact information (in production, save to database)
+    const contactEntry = {
+      id: Date.now(),
+      sessionId: sessionId || 'default',
+      name: name,
+      email: email,
+      phone: phone,
+      property: property || 'Not specified',
+      timestamp: new Date().toISOString()
+    };
+    
+    // In production, save to database
+    console.log(`   ✅ Contact information stored for session: ${sessionId || 'default'}`);
+    
+    res.json({
+      success: true,
+      message: 'Thank you for your information! Our team will contact you soon.',
+      contactId: contactEntry.id,
+      timestamp: contactEntry.timestamp
+    });
+
+  } catch (error) {
+    console.error('❌ Contact collection error:', error);
+    res.status(500).json({
+      error: 'Failed to process contact information'
     });
   }
 });

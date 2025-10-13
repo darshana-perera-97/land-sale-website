@@ -381,6 +381,134 @@
   }
 }
 
+/* Contact Form Styles */
+.contact-form-message {
+  max-width: 100%;
+  align-self: flex-start;
+  margin-bottom: 15px;
+}
+
+.contact-form {
+  background: #f8f8f8;
+  padding: 20px;
+  border-radius: 18px;
+  border-bottom-left-radius: 4px;
+  border: 1px solid #e5e5e5;
+}
+
+.contact-form h4 {
+  margin: 0 0 15px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+  font-family: 'Poppins', sans-serif;
+}
+
+.contact-form .form-group {
+  margin-bottom: 12px;
+}
+
+.contact-form input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.contact-form input:focus {
+  border-color: #dfa974;
+  box-shadow: 0 0 0 2px rgba(223, 169, 116, 0.1);
+}
+
+.contact-submit-btn {
+  width: 100%;
+  background: #dfa974;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+.contact-submit-btn:hover {
+  background: #c8965a;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(223, 169, 116, 0.3);
+}
+
+.contact-submit-btn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Enhanced Action Buttons */
+.quick-action-message {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 100%;
+  align-self: flex-start;
+  margin-bottom: 15px;
+  padding: 0 5px;
+}
+
+.quick-action-btn {
+  background: #ffffff;
+  border: 1px solid #dfa974;
+  color: #dfa974;
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  white-space: nowrap;
+  min-width: 120px;
+  text-align: center;
+}
+
+.quick-action-btn:hover {
+  background: #dfa974;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(223, 169, 116, 0.3);
+}
+
+/* Mobile Responsive for Contact Form */
+@media (max-width: 480px) {
+  .contact-form {
+    padding: 15px;
+  }
+  
+  .contact-form input {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+  
+  .contact-submit-btn {
+    font-size: 12px;
+    padding: 10px;
+  }
+  
+  .quick-action-btn {
+    font-size: 12px;
+    padding: 8px 14px;
+    min-width: 100px;
+  }
+}
+
 /* Scrollbar Styling */
 .chatbot-messages::-webkit-scrollbar {
   width: 4px;

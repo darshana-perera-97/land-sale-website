@@ -133,6 +133,8 @@ class FloatingChatbot {
       
       if (data.success) {
         this.addMessage(data.response);
+        // Check if we need to add action buttons based on response
+        this.addActionButtons(data.response);
       } else {
         this.addMessage('I apologize, but I\'m having trouble processing your request right now. Please try again.');
       }
@@ -249,6 +251,157 @@ class FloatingChatbot {
     
     this.messagesContainer.appendChild(quickActionDiv);
     this.scrollToBottom();
+  }
+
+  addActionButtons(messageText) {
+    // Check if the message contains the specific flow questions
+    if (messageText.includes('Would you like more details') || messageText.includes('schedule a viewing')) {
+      const actionDiv = document.createElement('div');
+      actionDiv.className = 'quick-action-message';
+      
+      const actions = [
+        { text: 'More Details', action: 'more_details' },
+        { text: 'Schedule Viewing', action: 'schedule_viewing' }
+      ];
+      
+      actions.forEach(action => {
+        const button = document.createElement('button');
+        button.className = 'quick-action-btn';
+        button.textContent = action.text;
+        button.dataset.action = action.action;
+        button.addEventListener('click', () => {
+          this.handleFlowAction(action.action);
+          actionDiv.remove();
+        });
+        actionDiv.appendChild(button);
+      });
+      
+      this.messagesContainer.appendChild(actionDiv);
+      this.scrollToBottom();
+    }
+    
+    // Check if we need to show contact form
+    if (messageText.includes('contact details') || messageText.includes('your information')) {
+      setTimeout(() => {
+        this.showContactForm();
+      }, 1000);
+    }
+  }
+
+  handleFlowAction(action) {
+    let responseMessage = '';
+    
+    switch(action) {
+      case 'more_details':
+        responseMessage = 'I would like more details about this property';
+        break;
+      case 'schedule_viewing':
+        responseMessage = 'I would like to schedule a viewing';
+        break;
+    }
+    
+    this.addMessage(responseMessage, true);
+    this.sendMessageToBackend(responseMessage);
+  }
+
+  showContactForm() {
+    const contactFormDiv = document.createElement('div');
+    contactFormDiv.className = 'contact-form-message';
+    contactFormDiv.innerHTML = `
+      <div class="contact-form">
+        <h4>Please provide your contact information:</h4>
+        <form id="contact-form">
+          <div class="form-group">
+            <input type="text" id="contact-name" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" id="contact-email" placeholder="Your Email" required>
+          </div>
+          <div class="form-group">
+            <input type="tel" id="contact-phone" placeholder="Your Phone Number" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="contact-property" placeholder="Property of Interest (Optional)">
+          </div>
+          <button type="submit" class="contact-submit-btn">Submit Information</button>
+        </form>
+      </div>
+    `;
+    
+    this.messagesContainer.appendChild(contactFormDiv);
+    this.scrollToBottom();
+    
+    // Bind form submission
+    const form = contactFormDiv.querySelector('#contact-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.submitContactForm(form);
+    });
+  }
+
+  async submitContactForm(form) {
+    const formData = new FormData(form);
+    const contactData = {
+      name: form.querySelector('#contact-name').value,
+      email: form.querySelector('#contact-email').value,
+      phone: form.querySelector('#contact-phone').value,
+      property: form.querySelector('#contact-property').value,
+      sessionId: this.sessionId
+    };
+    
+    try {
+      const response = await fetch(`${this.apiUrl}/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactData)
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        this.addMessage(data.message);
+        // Remove the contact form
+        const contactForm = document.querySelector('.contact-form-message');
+        if (contactForm) {
+          contactForm.remove();
+        }
+      } else {
+        this.addMessage('Sorry, there was an error submitting your information. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      this.addMessage('Sorry, there was an error submitting your information. Please try again.');
+    }
+  }
+
+  async sendMessageToBackend(message) {
+    try {
+      const response = await fetch(`${this.apiUrl}/message`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: message,
+          sessionId: this.sessionId
+        })
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        this.addMessage(data.response);
+        // Check if we need to add action buttons
+        this.addActionButtons(data.response);
+      } else {
+        this.addMessage('I apologize, but I\'m having trouble processing your request right now. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      this.addMessage('I\'m sorry, but I\'m having connection issues. Please try again in a moment.');
+    }
   }
 
   scrollToBottom() {

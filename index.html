@@ -278,10 +278,130 @@
       font-family: 'Poppins', sans-serif;
     }
 
+    /* Popup Action Buttons */
+    .chatbot-popup-action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0;
+      padding: 0 5px;
+    }
+
+    .chatbot-popup-action-btn {
+      background: #ffffff;
+      border: 1px solid #007bff;
+      color: #007bff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .chatbot-popup-action-btn:hover {
+      background: #007bff;
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+    }
+
+    /* Popup Contact Form */
+    .chatbot-popup-contact-form {
+      margin: 10px 0;
+      padding: 0 5px;
+    }
+
+    .chatbot-popup-form {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid #e5e5e5;
+    }
+
+    .chatbot-popup-form h4 {
+      margin: 0 0 12px 0;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .chatbot-popup-form .form-group {
+      margin-bottom: 10px;
+    }
+
+    .chatbot-popup-form input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #e5e5e5;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: 'Poppins', sans-serif;
+      outline: none;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .chatbot-popup-form input:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+    }
+
+    .popup-contact-submit-btn {
+      width: 100%;
+      background: #007bff;
+      color: #ffffff;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 6px;
+    }
+
+    .popup-contact-submit-btn:hover {
+      background: #0056b3;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+    }
+
     /* Mobile Footer Copyright Centering */
     @media (max-width: 768px) {
       .co-text p {
         text-align: center !important;
+      }
+    }
+
+    /* Mobile Logo Display */
+    .mobile-logo {
+      display: none;
+      
+    }
+
+    .desktop-logo {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-logo {
+        display: block;
+        margin-right: 25px;
+      }
+      
+      .desktop-logo {
+        display: none;
+      }
+
+      /* Mobile navbar spacing */
+      .modern-navbar .container {
+        padding-left: 30px;
+        padding-right: 20px;
       }
     }
   </style>
@@ -292,14 +412,16 @@
   <nav class="modern-navbar navbar navbar-expand-lg fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img src="./Assets/SiteLogo.png" alt="ALRAS REAL ESTATE" class="navbar-logo">
-        
+        <img src="./Assets/SiteLogo.png" alt="ALRAS REAL ESTATE" class="navbar-logo desktop-logo">
+        <img src="./Assets/logo-emblum.png" alt="ALRAS REAL ESTATE" class="navbar-logo mobile-logo">
+
       </a>
-      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      
+
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
@@ -339,10 +461,9 @@
       <div class="row h-100">
         <div class="col-12">
           <div class="hero-content">
-            <img src="./Assets/SiteLogo.png" alt="ALRAS REAL ESTATE Logo"
-              class="hero-logo" decoding="async" />
+            <img src="./Assets/SiteLogo.png" alt="ALRAS REAL ESTATE Logo" class="hero-logo" decoding="async" />
             <h1 class="hero-title px-4">
-              <span class="title-line-1">ALRAS REAL ESTATE</span>
+              <!-- <span class="title-line-1">ALRAS REAL ESTATE</span> -->
               <span class="title-line-2">Premium Real Estate Solutions</span>
             </h1>
 
@@ -429,9 +550,13 @@
               <img src="./Assets/residential.png" alt="High Quality Properties" class="card-icon-img">
             </div>
             <div class="card-content">
-              <h4>High Quality Properties</h4>
-              <p>The luxurious and exquisite design harmonious with the surrounding architecture provide the best living
-                conditions for every family.</p>
+              <h4>Property Leasing </h4>
+              <p>Curated residential and
+                commercial spaces designed for
+                your lifestyle and business.
+                From sky-high penthouses to
+                strategic retail locations,
+                experience Dubai's best. </p>
             </div>
           </div>
         </div>
@@ -439,12 +564,16 @@
           <div class="why-choose-card">
             <div class="card-number">02</div>
             <div class="card-icon">
-              <img src="./Assets/amenities.png" alt="Comprehensive Amenities" class="card-icon-img">
+              <img src="./Assets/businessman.png" alt="Comprehensive Amenities" class="card-icon-img">
             </div>
             <div class="card-content">
-              <h4>Comprehensive Amenities</h4>
-              <p>The landscape infrastructures of streets are arranged in harmony with the common amenities for
-                residents.</p>
+              <h4>Labour & Staff
+                Accommodation </h4>
+              <p>We redefine workforce housing.
+                Discover compliant, safe, and
+                productive living environments
+                for your teams, managed with
+                precision and care.</p>
             </div>
           </div>
         </div>
@@ -452,12 +581,15 @@
           <div class="why-choose-card">
             <div class="card-number">03</div>
             <div class="card-icon">
-              <img src="./Assets/businessman.png" alt="Professional Services" class="card-icon-img">
+              <img src="./Assets/amenities.png" alt="Professional Services" class="card-icon-img">
             </div>
             <div class="card-content">
-              <h4>Professional Services</h4>
-              <p>The customer service center is ready to serve 24/7, support the residents to provide information about
-                the urban area.</p>
+              <h4>Land & Investment </h4>
+              <p>Unlock the future of Dubai. We
+                provide exclusive access and
+                data-driven advisory for strategic
+                land acquisition and
+                development projects.</p>
             </div>
           </div>
         </div>
@@ -468,9 +600,15 @@
               <img src="./Assets/renewable-energy.png" alt="Green and Clean Environment" class="card-icon-img">
             </div>
             <div class="card-content">
-              <h4>Green and Clean Environment</h4>
-              <p>Each urban area of ALRAS REAL ESTATE is built on the basis of "A place that living is in harmony with
-                nature"</p>
+              <h4>Professional Brokerage</h4>
+              <p>At the heart of every successful
+                transaction is an advisor you
+                trust. Our RERA-certified
+                brokerage provides end-to-end
+                advisory, combining market
+                intelligence with a relentless
+                focus on your goals for results
+                that exceed expectations.</p>
             </div>
           </div>
         </div>
@@ -481,8 +619,13 @@
               <img src="./Assets/target-market.png" alt="Community Focus" class="card-icon-img">
             </div>
             <div class="card-content">
-              <h4>Community Focus</h4>
-              <p>Family members, as well as building the sense of affection for the neighbors.</p>
+              <h4>Apartment Rental </h4>
+              <p>Our team of RERA-certified
+                professionals acts as your
+                dedicated partner, providing
+                comprehensive advisory from
+                the first viewing to the final
+                signature.</p>
             </div>
           </div>
         </div>
@@ -1060,15 +1203,15 @@
 
   <script>
     // Smooth scrolling and navbar functionality
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // Smooth scrolling for navbar links
       const navLinks = document.querySelectorAll('.nav-link');
       navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
           e.preventDefault();
           const targetId = this.getAttribute('href');
           const targetSection = document.querySelector(targetId);
-          
+
           if (targetSection) {
             const offsetTop = targetSection.offsetTop - 100; // Account for floating navbar
             window.scrollTo({
@@ -1102,7 +1245,7 @@
       }
 
       // Event listeners
-      window.addEventListener('scroll', function() {
+      window.addEventListener('scroll', function () {
         updateActiveNavLink();
       });
 
@@ -1252,6 +1395,161 @@
 
       messagesContainer.appendChild(messageDiv);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      
+      // Check if we need to add action buttons
+      if (!isUser) {
+        addPopupActionButtons(content);
+      }
+    }
+
+    function addPopupActionButtons(messageText) {
+      // Check if the message contains the specific flow questions
+      if (messageText.includes('Would you like more details') || messageText.includes('schedule a viewing')) {
+        const actionDiv = document.createElement('div');
+        actionDiv.className = 'chatbot-popup-action-buttons';
+        
+        const actions = [
+          { text: 'More Details', action: 'more_details' },
+          { text: 'Schedule Viewing', action: 'schedule_viewing' }
+        ];
+        
+        actions.forEach(action => {
+          const button = document.createElement('button');
+          button.className = 'chatbot-popup-action-btn';
+          button.textContent = action.text;
+          button.dataset.action = action.action;
+          button.addEventListener('click', () => {
+            handlePopupFlowAction(action.action);
+            actionDiv.remove();
+          });
+          actionDiv.appendChild(button);
+        });
+        
+        const messagesContainer = document.getElementById('chatbot-popup-messages');
+        messagesContainer.appendChild(actionDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+      
+      // Check if we need to show contact form
+      if (messageText.includes('contact details') || messageText.includes('your information')) {
+        setTimeout(() => {
+          showPopupContactForm();
+        }, 1000);
+      }
+    }
+
+    function handlePopupFlowAction(action) {
+      let responseMessage = '';
+      
+      switch(action) {
+        case 'more_details':
+          responseMessage = 'I would like more details about this property';
+          break;
+        case 'schedule_viewing':
+          responseMessage = 'I would like to schedule a viewing';
+          break;
+      }
+      
+      addPopupMessage(responseMessage, true);
+      sendPopupMessageToBackend(responseMessage);
+    }
+
+    function showPopupContactForm() {
+      const contactFormDiv = document.createElement('div');
+      contactFormDiv.className = 'chatbot-popup-contact-form';
+      contactFormDiv.innerHTML = `
+        <div class="chatbot-popup-form">
+          <h4>Please provide your contact information:</h4>
+          <form id="popup-contact-form">
+            <div class="form-group">
+              <input type="text" id="popup-contact-name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="popup-contact-email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+              <input type="tel" id="popup-contact-phone" placeholder="Your Phone Number" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="popup-contact-property" placeholder="Property of Interest (Optional)">
+            </div>
+            <button type="submit" class="popup-contact-submit-btn">Submit Information</button>
+          </form>
+        </div>
+      `;
+      
+      const messagesContainer = document.getElementById('chatbot-popup-messages');
+      messagesContainer.appendChild(contactFormDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      
+      // Bind form submission
+      const form = contactFormDiv.querySelector('#popup-contact-form');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        submitPopupContactForm(form);
+      });
+    }
+
+    async function submitPopupContactForm(form) {
+      const contactData = {
+        name: form.querySelector('#popup-contact-name').value,
+        email: form.querySelector('#popup-contact-email').value,
+        phone: form.querySelector('#popup-contact-phone').value,
+        property: form.querySelector('#popup-contact-property').value,
+        sessionId: popupSessionId
+      };
+      
+      try {
+        const response = await fetch(`${popupApiUrl}/contact`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(contactData)
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          addPopupMessage(data.message);
+          // Remove the contact form
+          const contactForm = document.querySelector('.chatbot-popup-contact-form');
+          if (contactForm) {
+            contactForm.remove();
+          }
+        } else {
+          addPopupMessage('Sorry, there was an error submitting your information. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting contact form:', error);
+        addPopupMessage('Sorry, there was an error submitting your information. Please try again.');
+      }
+    }
+
+    async function sendPopupMessageToBackend(message) {
+      try {
+        const response = await fetch(`${popupApiUrl}/message`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: message,
+            sessionId: popupSessionId
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          addPopupMessage(data.response);
+        } else {
+          addPopupMessage('I apologize, but I\'m having trouble processing your request right now. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error sending message:', error);
+        addPopupMessage('I\'m sorry, but I\'m having connection issues. Please try again in a moment.');
+      }
     }
 
     function showPopupTypingIndicator() {
