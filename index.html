@@ -1404,13 +1404,13 @@
 
     function addPopupActionButtons(messageText) {
       // Check if the message contains the specific flow questions
-      if (messageText.includes('Would you like more details') || messageText.includes('schedule a viewing')) {
+      if (messageText.includes('Would you like to schedule a viewing or get more information')) {
         const actionDiv = document.createElement('div');
         actionDiv.className = 'chatbot-popup-action-buttons';
         
         const actions = [
-          { text: 'More Details', action: 'more_details' },
-          { text: 'Schedule Viewing', action: 'schedule_viewing' }
+          // { text: 'Schedule Viewing', action: 'schedule_viewing' },
+          // { text: 'Get More Information', action: 'more_details' }
         ];
         
         actions.forEach(action => {
@@ -1430,8 +1430,8 @@
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
       }
       
-      // Check if we need to show contact form
-      if (messageText.includes('contact details') || messageText.includes('your information')) {
+      // Check if we need to show contact form (when agent Suno is mentioned)
+      if (messageText.includes('agent Suno') || messageText.includes('contact number or email address')) {
         setTimeout(() => {
           showPopupContactForm();
         }, 1000);
@@ -1443,10 +1443,10 @@
       
       switch(action) {
         case 'more_details':
-          responseMessage = 'I would like more details about this property';
+          responseMessage = 'I would like to get more information';
           break;
         case 'schedule_viewing':
-          responseMessage = 'I would like to schedule a viewing';
+          responseMessage = 'Let\'s schedule time';
           break;
       }
       
@@ -1459,21 +1459,18 @@
       contactFormDiv.className = 'chatbot-popup-contact-form';
       contactFormDiv.innerHTML = `
         <div class="chatbot-popup-form">
-          <h4>Please provide your contact information:</h4>
+          <h4>Please provide your contact number or email address:</h4>
           <form id="popup-contact-form">
-            <div class="form-group">
-              <input type="text" id="popup-contact-name" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-              <input type="email" id="popup-contact-email" placeholder="Your Email" required>
-            </div>
             <div class="form-group">
               <input type="tel" id="popup-contact-phone" placeholder="Your Phone Number" required>
             </div>
             <div class="form-group">
-              <input type="text" id="popup-contact-property" placeholder="Property of Interest (Optional)">
+              <input type="email" id="popup-contact-email" placeholder="Your Email Address" required>
             </div>
-            <button type="submit" class="popup-contact-submit-btn">Submit Information</button>
+            <div class="form-group">
+              <input type="text" id="popup-contact-name" placeholder="Your Name (Optional)">
+            </div>
+            <button type="submit" class="popup-contact-submit-btn">Submit Contact Information</button>
           </form>
         </div>
       `;

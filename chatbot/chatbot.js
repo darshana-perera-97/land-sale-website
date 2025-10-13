@@ -4,7 +4,8 @@ class FloatingChatbot {
     this.isOpen = false;
     this.messages = [];
     this.sessionId = this.generateSessionId();
-    this.apiUrl = 'https://landsale-backend.nexgenai.asia/api/chatbot';
+    this.apiUrl = 'http://localhost:3000/api/chatbot';
+    // this.apiUrl = 'https://landsale-backend.nexgenai.asia/api/chatbot';
     // this.apiUrl = 'http://localhost:3000/api/chatbot';   https://landsale-backend.nexgenai.asia/api/health
     this.init();
   }
@@ -255,13 +256,13 @@ class FloatingChatbot {
 
   addActionButtons(messageText) {
     // Check if the message contains the specific flow questions
-    if (messageText.includes('Would you like more details') || messageText.includes('schedule a viewing')) {
+    if (messageText.includes('Would you like to schedule a viewing or get more information')) {
       const actionDiv = document.createElement('div');
       actionDiv.className = 'quick-action-message';
       
       const actions = [
-        { text: 'More Details', action: 'more_details' },
-        { text: 'Schedule Viewing', action: 'schedule_viewing' }
+        // { text: 'Schedule Viewing', action: 'schedule_viewing' },
+        // { text: 'Get More Information', action: 'more_details' }
       ];
       
       actions.forEach(action => {
@@ -280,8 +281,8 @@ class FloatingChatbot {
       this.scrollToBottom();
     }
     
-    // Check if we need to show contact form
-    if (messageText.includes('contact details') || messageText.includes('your information')) {
+    // Check if we need to show contact form (when agent Suno is mentioned)
+    if (messageText.includes('agent Suno') || messageText.includes('contact number or email address')) {
       setTimeout(() => {
         this.showContactForm();
       }, 1000);
@@ -293,10 +294,10 @@ class FloatingChatbot {
     
     switch(action) {
       case 'more_details':
-        responseMessage = 'I would like more details about this property';
+        responseMessage = 'I would like to get more information';
         break;
       case 'schedule_viewing':
-        responseMessage = 'I would like to schedule a viewing';
+        responseMessage = 'Let\'s schedule time';
         break;
     }
     
@@ -309,21 +310,18 @@ class FloatingChatbot {
     contactFormDiv.className = 'contact-form-message';
     contactFormDiv.innerHTML = `
       <div class="contact-form">
-        <h4>Please provide your contact information:</h4>
+        <h4>Please provide your contact number or email address:</h4>
         <form id="contact-form">
-          <div class="form-group">
-            <input type="text" id="contact-name" placeholder="Your Name" required>
-          </div>
-          <div class="form-group">
-            <input type="email" id="contact-email" placeholder="Your Email" required>
-          </div>
           <div class="form-group">
             <input type="tel" id="contact-phone" placeholder="Your Phone Number" required>
           </div>
           <div class="form-group">
-            <input type="text" id="contact-property" placeholder="Property of Interest (Optional)">
+            <input type="email" id="contact-email" placeholder="Your Email Address" required>
           </div>
-          <button type="submit" class="contact-submit-btn">Submit Information</button>
+          <div class="form-group">
+            <input type="text" id="contact-name" placeholder="Your Name (Optional)">
+          </div>
+          <button type="submit" class="contact-submit-btn">Submit Contact Information</button>
         </form>
       </div>
     `;
