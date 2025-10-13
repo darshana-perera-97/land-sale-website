@@ -55,21 +55,21 @@ COMPANY: ALRAS REAL ESTATE - Premium Real Estate Solutions
 AVAILABLE PROPERTIES:
 
 LAND PROPERTIES:
-1. Dubai Hills Estate Land - AED 2,500,000  - Keywords: luxury, golf, family - Prime location with golf course views
-2. Business Bay Plot - AED 1,800,000 - Keywords: commercial, downtown, investment - Commercial development opportunity
-3. Jumeirah Village Land - AED 1,200,000  - Keywords: residential, affordable, growth - Upcoming residential area
-4. Dubai Marina Plot - AED 3,200,000  - Keywords: waterfront, luxury, premium - Waterfront development land
-5. Arabian Ranches Land - AED 2,800,000 - Keywords: villa, family, community - Villa community development
+1. Dubai Hills Estate Land - AED 2,500,000 (7% discount) - Keywords: luxury, golf, family - Prime location with golf course views
+2. Business Bay Plot - AED 1,800,000 (5% discount) - Keywords: commercial, downtown, investment - Commercial development opportunity
+3. Jumeirah Village Land - AED 1,200,000 (5% discount) - Keywords: residential, affordable, growth - Upcoming residential area
+4. Dubai Marina Plot - AED 3,200,000 (7% discount) - Keywords: waterfront, luxury, premium - Waterfront development land
+5. Arabian Ranches Land - AED 2,800,000 (8% discount) - Keywords: villa, family, community - Villa community development
 
 HOME PROPERTIES:
-1. Downtown Dubai Apartment - AED 1,500,000  - Keywords: luxury, city, views - 2BR apartment with city views
-2. Palm Jumeirah Villa - AED 8,500,000  - Keywords: beachfront, luxury, villa - 5BR beachfront villa
-3. Dubai Hills Villa - AED 3,200,000 - Keywords: golf, family, modern - 4BR villa with golf course access
-4. Business Bay Apartment - AED 1,200,000 - Keywords: commercial, modern, investment - 1BR modern apartment
-5. JBR Apartment - AED 2,100,000 - Keywords: beach, luxury, rental - 2BR beachfront apartment
-6. Arabian Ranches Villa - AED 2,800,000 - Keywords: family, community, spacious - 3BR family villa
-7. Dubai Marina Apartment - AED 1,800,000 - Keywords: waterfront, luxury, modern - 2BR marina view apartment
-8. Jumeirah Villa - AED 6,500,000 - Keywords: beach, luxury, traditional - 4BR traditional beach villa
+1. Downtown Dubai Apartment - AED 1,500,000 (7% discount) - Keywords: luxury, city, views - 2BR apartment with city views
+2. Palm Jumeirah Villa - AED 8,500,000 (8% discount) - Keywords: beachfront, luxury, villa - 5BR beachfront villa
+3. Dubai Hills Villa - AED 3,200,000 (6% discount) - Keywords: golf, family, modern - 4BR villa with golf course access
+4. Business Bay Apartment - AED 1,200,000 (7% High ROI) - Keywords: commercial, modern, investment - 1BR modern apartment
+5. JBR Apartment - AED 2,100,000 (7% discount) - Keywords: beach, luxury, rental - 2BR beachfront apartment
+6. Arabian Ranches Villa - AED 2,800,000 (6% discount) - Keywords: family, community, spacious - 3BR family villa
+7. Dubai Marina Apartment - AED 1,800,000 (7% discount) - Keywords: waterfront, luxury, modern - 2BR marina view apartment
+8. Jumeirah Villa - AED 6,500,000 (6% discount) - Keywords: beach, luxury, traditional - 4BR traditional beach villa
 
 INSTRUCTIONS: Provide helpful answers about properties, pricing, locations, or real estate services. Be informative and engaging. After answering, wait for the next question.`;
       
