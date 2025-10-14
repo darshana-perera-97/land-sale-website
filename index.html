@@ -1397,8 +1397,7 @@
     // const popupApiUrl = 'https://landsale-backend.nexgenai.asia/api/chatbot';
 
     // Popup conversation flow tracking
-    let popupConversationStage = 'questions';
-    let popupQuestionCount = 0;
+    let popupConversationStage = 'welcome';
 
     function openChatbotPopup() {
       const overlay = document.getElementById('chatbot-popup-overlay');
@@ -1439,8 +1438,10 @@
               if (data.conversationStage) {
                 popupConversationStage = data.conversationStage;
               }
-              if (data.questionCount !== undefined) {
-                popupQuestionCount = data.questionCount;
+              
+              // Check if we need to add action buttons
+              if (data.showButtons) {
+                addPopupActionButtons();
               }
             } else {
               addPopupMessage('I apologize, but I\'m having trouble processing your request right now. Please try again.');
@@ -1483,6 +1484,8 @@
       messageDiv.appendChild(messageContent);
 
       messagesContainer.appendChild(messageDiv);
+      
+      // Don't add buttons automatically - let the backend control when to show them
     }
 
     function sendPopupMessage() {
@@ -1517,8 +1520,10 @@
             if (data.conversationStage) {
               popupConversationStage = data.conversationStage;
             }
-            if (data.questionCount !== undefined) {
-              popupQuestionCount = data.questionCount;
+            
+            // Check if we need to add action buttons
+            if (data.showButtons) {
+              addPopupActionButtons();
             }
           } else {
             addPopupMessage('I apologize, but I\'m having trouble processing your request right now. Please try again.');
@@ -1550,60 +1555,149 @@
       messagesContainer.appendChild(messageDiv);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-      // Check if we need to add action buttons
-      if (!isUser) {
-        addPopupActionButtons(content);
-      }
+      // Don't automatically add buttons - let the backend control when to show them
     }
 
-    function addPopupActionButtons(messageText) {
-      // Check if the message contains the specific flow questions
-      if (messageText.includes('Would you like to schedule a viewing or get more information')) {
-        const actionDiv = document.createElement('div');
-        actionDiv.className = 'chatbot-popup-action-buttons';
+    function addPopupActionButtons() {
+      // Check if action buttons already exist to prevent duplicates
+      const existingButtons = document.querySelector('.chatbot-popup-action-buttons');
+      if (existingButtons) {
+        console.log('Popup action buttons already exist, skipping...');
+        return;
+      }
+      
+      const actionDiv = document.createElement('div');
+      actionDiv.className = 'chatbot-popup-action-buttons';
 
-        const actions = [
-          // { text: 'Schedule Viewing', action: 'schedule_viewing' },
-          // { text: 'Get More Information', action: 'more_details' }
-        ];
+      const actions = [
+        { text: 'Schedule a Call', action: 'schedule_call' },
+        { text: 'More Details', action: 'more_details' }
+      ];
 
-        actions.forEach(action => {
-          const button = document.createElement('button');
-          button.className = 'chatbot-popup-action-btn';
-          button.textContent = action.text;
-          button.dataset.action = action.action;
-          button.addEventListener('click', () => {
-            handlePopupFlowAction(action.action);
-            actionDiv.remove();
-          });
-          actionDiv.appendChild(button);
+      actions.forEach(action => {
+        const button = document.createElement('button');
+        button.className = 'chatbot-popup-action-btn';
+        button.textContent = action.text;
+        button.dataset.action = action.action;
+        button.addEventListener('click', () => {
+          handlePopupButtonAction(action.action);
+          actionDiv.remove();
+        });
+        actionDiv.appendChild(button);
+      });
+
+      const messagesContainer = document.getElementById('chatbot-popup-messages');
+      messagesContainer.appendChild(actionDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    async function handlePopupButtonAction(action) {
+      try {
+        // Show typing indicator
+        showPopupTypingIndicator();
+        
+        // Send button action to backend
+        const response = await fetch(`${popupApiUrl}/button-action`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: action,
+            sessionId: popupSessionId
+          })
         });
 
-        const messagesContainer = document.getElementById('chatbot-popup-messages');
-        messagesContainer.appendChild(actionDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        const data = await response.json();
+        
+        // Hide typing indicator
+        hidePopupTypingIndicator();
+        
+        if (data.success) {
+          addPopupMessage(data.response);
+          
+          // Update conversation state from backend response
+          if (data.conversationStage) {
+            popupConversationStage = data.conversationStage;
+          }
+          
+          // Check if we need to show contact form
+          if (data.showContactForm) {
+            showPopupContactForm();
+          }
+        } else {
+          addPopupMessage('I apologize, but I\'m having trouble processing your request right now. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error handling button action:', error);
+        hidePopupTypingIndicator();
+        addPopupMessage('I\'m sorry, but I\'m having connection issues. Please try again in a moment.');
       }
-
-      // Contact form functionality removed - no longer showing contact form
     }
 
-    function handlePopupFlowAction(action) {
-      let responseMessage = '';
-
-      switch (action) {
-        case 'more_details':
-          responseMessage = 'I would like to get more information';
-          break;
-        case 'schedule_viewing':
-          responseMessage = 'Let\'s schedule time';
-          break;
-      }
-
-      addPopupMessage(responseMessage, true);
-      sendPopupMessageToBackend(responseMessage);
+    function showPopupContactForm() {
+      const contactFormDiv = document.createElement('div');
+      contactFormDiv.className = 'chatbot-popup-contact-form';
+      contactFormDiv.innerHTML = `
+        <div class="chatbot-popup-form">
+          <h4>Please provide your contact information:</h4>
+          <form id="popup-contact-form">
+            <div class="form-group">
+              <input type="text" id="popup-contact-name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <input type="tel" id="popup-contact-phone" placeholder="Your Phone Number" required>
+            </div>
+            <button type="submit" class="popup-contact-submit-btn">Submit Contact Information</button>
+          </form>
+        </div>
+      `;
+      
+      const messagesContainer = document.getElementById('chatbot-popup-messages');
+      messagesContainer.appendChild(contactFormDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      
+      // Bind form submission
+      const form = contactFormDiv.querySelector('#popup-contact-form');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        submitPopupContactForm(form);
+      });
     }
 
-    // Contact form functionality removed
+    async function submitPopupContactForm(form) {
+      const contactData = {
+        name: form.querySelector('#popup-contact-name').value,
+        phone: form.querySelector('#popup-contact-phone').value,
+        sessionId: popupSessionId
+      };
+      
+      try {
+        const response = await fetch(`${popupApiUrl}/contact`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(contactData)
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          addPopupMessage(data.message);
+          // Remove the contact form
+          const contactForm = document.querySelector('.chatbot-popup-contact-form');
+          if (contactForm) {
+            contactForm.remove();
+          }
+        } else {
+          addPopupMessage('Sorry, there was an error submitting your information. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting contact form:', error);
+        addPopupMessage('Sorry, there was an error submitting your information. Please try again.');
+      }
+    }
 
     async function sendPopupMessageToBackend(message) {
       try {
@@ -1627,8 +1721,10 @@
           if (data.conversationStage) {
             popupConversationStage = data.conversationStage;
           }
-          if (data.questionCount !== undefined) {
-            popupQuestionCount = data.questionCount;
+          
+          // Check if we need to add action buttons
+          if (data.showButtons) {
+            addPopupActionButtons();
           }
         } else {
           addPopupMessage('I apologize, but I\'m having trouble processing your request right now. Please try again.');

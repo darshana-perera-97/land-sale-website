@@ -7,8 +7,7 @@ class FloatingChatbot {
     // this.apiUrl = 'http://localhost:3001/api/chatbot';
     this.apiUrl = 'https://alras.nexgenai.asia/api/chatbot';
     // this.apiUrl = 'http://localhost:3000/api/chatbot';   https://landsale-backend.nexgenai.asia/api/health
-    this.conversationStage = 'questions';
-    this.questionCount = 0;
+    this.conversationStage = 'welcome';
     this.init();
   }
 
@@ -141,12 +140,11 @@ class FloatingChatbot {
         if (data.conversationStage) {
           this.conversationStage = data.conversationStage;
         }
-        if (data.questionCount !== undefined) {
-          this.questionCount = data.questionCount;
-        }
         
-        // Check if we need to add action buttons based on response
-        this.addActionButtons(data.response);
+        // Check if we need to add action buttons
+        if (data.showButtons) {
+          this.addActionButtons();
+        }
       } else {
         this.addMessage('I apologize, but I\'m having trouble processing your request right now. Please try again.');
       }
@@ -232,10 +230,7 @@ class FloatingChatbot {
   addWelcomeMessage() {
     // Welcome message is already in HTML
     this.showNotification();
-    // Add quick action buttons after a short delay
-    setTimeout(() => {
-      this.addQuickActionButtons();
-    }, 500);
+    // Don't add buttons automatically - let the backend control when to show them
   }
 
   addQuickActionButtons() {
@@ -265,53 +260,144 @@ class FloatingChatbot {
     this.scrollToBottom();
   }
 
-  addActionButtons(messageText) {
-    // Check if the message contains the specific flow questions
-    if (messageText.includes('Would you like to schedule a viewing or get more information')) {
-      const actionDiv = document.createElement('div');
-      actionDiv.className = 'quick-action-message';
+  addActionButtons() {
+    // Check if action buttons already exist to prevent duplicates
+    const existingButtons = document.querySelector('.quick-action-message');
+    if (existingButtons) {
+      console.log('Action buttons already exist, skipping...');
+      return;
+    }
+    
+    const actionDiv = document.createElement('div');
+    actionDiv.className = 'quick-action-message';
+    
+    const actions = [
+      { text: 'Schedule a Call', action: 'schedule_call' },
+      { text: 'More Details', action: 'more_details' }
+    ];
+    
+    actions.forEach(action => {
+      const button = document.createElement('button');
+      button.className = 'quick-action-btn';
+      button.textContent = action.text;
+      button.dataset.action = action.action;
+      button.addEventListener('click', () => {
+        this.handleButtonAction(action.action);
+        actionDiv.remove();
+      });
+      actionDiv.appendChild(button);
+    });
+    
+    this.messagesContainer.appendChild(actionDiv);
+    this.scrollToBottom();
+  }
+
+  async handleButtonAction(action) {
+    try {
+      // Show typing indicator
+      this.showTypingIndicator();
       
-      const actions = [
-        // { text: 'Schedule Viewing', action: 'schedule_viewing' },
-        // { text: 'Get More Information', action: 'more_details' }
-      ];
+      // Send button action to backend
+      const response = await fetch(`${this.apiUrl}/button-action`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action: action,
+          sessionId: this.sessionId
+        })
+      });
+
+      const data = await response.json();
       
-      actions.forEach(action => {
-        const button = document.createElement('button');
-        button.className = 'quick-action-btn';
-        button.textContent = action.text;
-        button.dataset.action = action.action;
-        button.addEventListener('click', () => {
-          this.handleFlowAction(action.action);
-          actionDiv.remove();
-        });
-        actionDiv.appendChild(button);
+      // Hide typing indicator
+      this.hideTypingIndicator();
+      
+      if (data.success) {
+        this.addMessage(data.response);
+        
+        // Update conversation state from backend response
+        if (data.conversationStage) {
+          this.conversationStage = data.conversationStage;
+        }
+        
+        // Check if we need to show contact form
+        if (data.showContactForm) {
+          this.showContactForm();
+        }
+      } else {
+        this.addMessage('I apologize, but I\'m having trouble processing your request right now. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error handling button action:', error);
+      this.hideTypingIndicator();
+      this.addMessage('I\'m sorry, but I\'m having connection issues. Please try again in a moment.');
+    }
+  }
+
+  showContactForm() {
+    const contactFormDiv = document.createElement('div');
+    contactFormDiv.className = 'contact-form-message';
+    contactFormDiv.innerHTML = `
+      <div class="contact-form">
+        <h4>Please provide your contact information:</h4>
+        <form id="contact-form">
+          <div class="form-group">
+            <input type="text" id="contact-name" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="tel" id="contact-phone" placeholder="Your Phone Number" required>
+          </div>
+          <button type="submit" class="contact-submit-btn">Submit Contact Information</button>
+        </form>
+      </div>
+    `;
+    
+    this.messagesContainer.appendChild(contactFormDiv);
+    this.scrollToBottom();
+    
+    // Bind form submission
+    const form = contactFormDiv.querySelector('#contact-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.submitContactForm(form);
+    });
+  }
+
+  async submitContactForm(form) {
+    const contactData = {
+      name: form.querySelector('#contact-name').value,
+      phone: form.querySelector('#contact-phone').value,
+      sessionId: this.sessionId
+    };
+    
+    try {
+      const response = await fetch(`${this.apiUrl}/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactData)
       });
       
-      this.messagesContainer.appendChild(actionDiv);
-      this.scrollToBottom();
+      const data = await response.json();
+      
+      if (data.success) {
+        this.addMessage(data.message);
+        // Remove the contact form
+        const contactForm = document.querySelector('.contact-form-message');
+        if (contactForm) {
+          contactForm.remove();
+        }
+      } else {
+        this.addMessage('Sorry, there was an error submitting your information. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      this.addMessage('Sorry, there was an error submitting your information. Please try again.');
     }
-    
-    // Contact form functionality removed - no longer showing contact form
   }
-
-  handleFlowAction(action) {
-    let responseMessage = '';
-    
-    switch(action) {
-      case 'more_details':
-        responseMessage = 'I would like to get more information';
-        break;
-      case 'schedule_viewing':
-        responseMessage = 'Let\'s schedule time';
-        break;
-    }
-    
-    this.addMessage(responseMessage, true);
-    this.sendMessageToBackend(responseMessage);
-  }
-
-  // Contact form functionality removed
 
   async sendMessageToBackend(message) {
     try {
@@ -335,12 +421,11 @@ class FloatingChatbot {
         if (data.conversationStage) {
           this.conversationStage = data.conversationStage;
         }
-        if (data.questionCount !== undefined) {
-          this.questionCount = data.questionCount;
-        }
         
         // Check if we need to add action buttons
-        this.addActionButtons(data.response);
+        if (data.showButtons) {
+          this.addActionButtons();
+        }
       } else {
         this.addMessage('I apologize, but I\'m having trouble processing your request right now. Please try again.');
       }

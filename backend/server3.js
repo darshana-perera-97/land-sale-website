@@ -32,10 +32,9 @@ async function getChatGPTResponse(userMessage, sessionId) {
     // Initialize session data if it doesn't exist
     if (!sessionData[sessionId]) {
       sessionData[sessionId] = {
-        questionCount: 0,
         userName: null,
         userContact: null,
-        conversationStage: 'questions', // 'questions', 'name', 'contact', 'continue'
+        conversationStage: 'welcome', // 'welcome', 'properties', 'action_selection', 'contact_form', 'continue'
         conversationHistory: [] // Store actual conversation messages
       };
     }
@@ -44,26 +43,26 @@ async function getChatGPTResponse(userMessage, sessionId) {
     let systemPrompt = '';
     
     // Determine conversation stage and create appropriate prompt
-    if (session.conversationStage === 'questions' && session.questionCount < 4) {
-      // First 4 questions - provide answers
-      systemPrompt = `You are a real estate chatbot assistant for ALRAS REAL ESTATE. 
+    if (session.conversationStage === 'welcome') {
+      // Welcome stage - provide property information
+      systemPrompt = `You are a real estate chatbot assistant for ALRAS REAL ESTATE.
 
-CONVERSATION STAGE: Answering questions (Question ${session.questionCount + 1} of 4)
+CONVERSATION STAGE: Welcome and Property Information
 
 COMPANY: ALRAS REAL ESTATE - Premium Real Estate Solutions
 
 AVAILABLE PROPERTIES:
 
 LAND PROPERTIES:
-1. Dubai Hills Estate Land - AED 2,500,000  - Keywords: luxury, golf, family - Prime location with golf course views
+1. Dubai Hills Estate Land - AED 2,500,000 - Keywords: luxury, golf, family - Prime location with golf course views
 2. Business Bay Plot - AED 1,800,000 - Keywords: commercial, downtown, investment - Commercial development opportunity
 3. Jumeirah Village Land - AED 1,200,000  - Keywords: residential, affordable, growth - Upcoming residential area
-4. Dubai Marina Plot - AED 3,200,000  - Keywords: waterfront, luxury, premium - Waterfront development land
+4. Dubai Marina Plot - AED 3,200,000 - Keywords: waterfront, luxury, premium - Waterfront development land
 5. Arabian Ranches Land - AED 2,800,000 - Keywords: villa, family, community - Villa community development
 
 HOME PROPERTIES:
-1. Downtown Dubai Apartment - AED 1,500,000  - Keywords: luxury, city, views - 2BR apartment with city views
-2. Palm Jumeirah Villa - AED 8,500,000  - Keywords: beachfront, luxury, villa - 5BR beachfront villa
+1. Downtown Dubai Apartment - AED 1,500,000 - Keywords: luxury, city, views - 2BR apartment with city views
+2. Palm Jumeirah Villa - AED 8,500,000 - Keywords: beachfront, luxury, villa - 5BR beachfront villa
 3. Dubai Hills Villa - AED 3,200,000 - Keywords: golf, family, modern - 4BR villa with golf course access
 4. Business Bay Apartment - AED 1,200,000 - Keywords: commercial, modern, investment - 1BR modern apartment
 5. JBR Apartment - AED 2,100,000 - Keywords: beach, luxury, rental - 2BR beachfront apartment
@@ -71,32 +70,52 @@ HOME PROPERTIES:
 7. Dubai Marina Apartment - AED 1,800,000 - Keywords: waterfront, luxury, modern - 2BR marina view apartment
 8. Jumeirah Villa - AED 6,500,000 - Keywords: beach, luxury, traditional - 4BR traditional beach villa
 
-INSTRUCTIONS: Provide helpful answers about properties, pricing, locations, or real estate services. Be informative and engaging. After answering, wait for the next question.`;
+INSTRUCTIONS: 
+- Welcome the user warmly
+- Provide a brief overview of our premium properties
+- Mention the special discounts available
+- Be engaging and professional
+- After providing property information, indicate that action buttons will appear for next steps
+
+RESPONSE EXAMPLE: "Welcome to ALRAS REAL ESTATE! We offer premium land and home properties across Dubai with exclusive discounts. Our portfolio includes luxury villas in Palm Jumeirah, modern apartments in Downtown Dubai, and prime land plots in Dubai Hills Estate and Business Bay. All properties come with special discounts ranging from 5-8%. How can I assist you today?"`;
       
-    } else if (session.conversationStage === 'questions' && session.questionCount >= 4) {
-      // After 4 questions, ask for name
+    } else if (session.conversationStage === 'properties') {
+      // Properties stage - provide detailed property information
       systemPrompt = `You are a real estate chatbot assistant for ALRAS REAL ESTATE.
 
-CONVERSATION STAGE: Collecting user information
+CONVERSATION STAGE: Providing Detailed Property Information
 
-INSTRUCTIONS: The user has asked 4 questions. Now ask for their name to continue the conversation. Be friendly and professional.
+COMPANY: ALRAS REAL ESTATE - Premium Real Estate Solutions
 
-RESPONSE: "I'd be happy to help you further. Could you please tell me your name so I can assist you better?"`;
+AVAILABLE PROPERTIES:
+
+LAND PROPERTIES:
+1. Dubai Hills Estate Land - AED 2,500,000  - Keywords: luxury, golf, family - Prime location with golf course views
+2. Business Bay Plot - AED 1,800,000  - Keywords: commercial, downtown, investment - Commercial development opportunity
+3. Jumeirah Village Land - AED 1,200,000 - Keywords: residential, affordable, growth - Upcoming residential area
+4. Dubai Marina Plot - AED 3,200,000 - Keywords: waterfront, luxury, premium - Waterfront development land
+5. Arabian Ranches Land - AED 2,800,000 - Keywords: villa, family, community - Villa community development
+
+HOME PROPERTIES:
+1. Downtown Dubai Apartment - AED 1,500,000 - Keywords: luxury, city, views - 2BR apartment with city views
+2. Palm Jumeirah Villa - AED 8,500,000 - Keywords: beachfront, luxury, villa - 5BR beachfront villa
+3. Dubai Hills Villa - AED 3,200,000 - Keywords: golf, family, modern - 4BR villa with golf course access
+4. Business Bay Apartment - AED 1,200,000 - Keywords: commercial, modern, investment - 1BR modern apartment
+5. JBR Apartment - AED 2,100,000 - Keywords: beach, luxury, rental - 2BR beachfront apartment
+6. Arabian Ranches Villa - AED 2,800,000 - Keywords: family, community, spacious - 3BR family villa
+7. Dubai Marina Apartment - AED 1,800,000 - Keywords: waterfront, luxury, modern - 2BR marina view apartment
+8. Jumeirah Villa - AED 6,500,000 - Keywords: beach, luxury, traditional - 4BR traditional beach villa
+
+INSTRUCTIONS: 
+- Provide detailed information about properties
+- Answer specific questions about pricing, locations, features
+- Be informative and helpful
+- After providing information, indicate that action buttons will appear for next steps
+
+RESPONSE EXAMPLE: "Here are more details about our properties: [Provide specific information based on user's question]. Would you like to know more about any specific property or location?"`;
       
-    } else if (session.conversationStage === 'name') {
-      // After getting name, ask for contact number
-      systemPrompt = `You are a real estate chatbot assistant for ALRAS REAL ESTATE.
-
-CONVERSATION STAGE: Collecting contact information
-
-USER NAME: ${session.userName}
-
-INSTRUCTIONS: The user has provided their name. Now ask for their contact number. Be friendly and professional.
-
-RESPONSE: "Nice to meet you, ${session.userName}! Could you please provide your contact number?"`;
-      
-    } else if (session.conversationStage === 'contact') {
-      // After getting contact, continue normal conversation with context
+    } else if (session.conversationStage === 'continue') {
+      // Continue stage - normal conversation with context
       const recentQuestions = session.conversationHistory ? 
         session.conversationHistory.slice(-4).map(msg => msg.content).join(', ') : 
         'No previous questions recorded';
@@ -107,10 +126,9 @@ CONVERSATION STAGE: Continuing conversation with user details
 
 USER INFO: Name - ${session.userName}, Contact - ${session.userContact}
 
-CONVERSATION HISTORY: The user has asked ${session.questionCount} questions about real estate properties and services. Their recent questions were: ${recentQuestions}
+CONVERSATION HISTORY: The user's recent questions were: ${recentQuestions}
 
 INSTRUCTIONS: 
-- Acknowledge that you now have their contact information
 - Continue the conversation naturally, referencing their previous questions if relevant
 - Be personalized and friendly, using their name when appropriate
 - You can provide property information, schedule viewings, or answer any real estate questions
@@ -122,21 +140,21 @@ AGENT NAME: Suno
 AVAILABLE PROPERTIES:
 
 LAND PROPERTIES:
-1. Dubai Hills Estate Land - AED 2,500,000 (7% discount) - Keywords: luxury, golf, family - Prime location with golf course views
-2. Business Bay Plot - AED 1,800,000 (5% discount) - Keywords: commercial, downtown, investment - Commercial development opportunity
-3. Jumeirah Village Land - AED 1,200,000 (5% discount) - Keywords: residential, affordable, growth - Upcoming residential area
-4. Dubai Marina Plot - AED 3,200,000 (7% discount) - Keywords: waterfront, luxury, premium - Waterfront development land
-5. Arabian Ranches Land - AED 2,800,000 (8% discount) - Keywords: villa, family, community - Villa community development
+1. Dubai Hills Estate Land - AED 2,500,000  - Keywords: luxury, golf, family - Prime location with golf course views
+2. Business Bay Plot - AED 1,800,000 - Keywords: commercial, downtown, investment - Commercial development opportunity
+3. Jumeirah Village Land - AED 1,200,000 - Keywords: residential, affordable, growth - Upcoming residential area
+4. Dubai Marina Plot - AED 3,200,000  - Keywords: waterfront, luxury, premium - Waterfront development land
+5. Arabian Ranches Land - AED 2,800,000  - Keywords: villa, family, community - Villa community development
 
 HOME PROPERTIES:
-1. Downtown Dubai Apartment - AED 1,500,000 (7% discount) - Keywords: luxury, city, views - 2BR apartment with city views
-2. Palm Jumeirah Villa - AED 8,500,000 (8% discount) - Keywords: beachfront, luxury, villa - 5BR beachfront villa
-3. Dubai Hills Villa - AED 3,200,000 (6% discount) - Keywords: golf, family, modern - 4BR villa with golf course access
-4. Business Bay Apartment - AED 1,200,000 (7% High ROI) - Keywords: commercial, modern, investment - 1BR modern apartment
-5. JBR Apartment - AED 2,100,000 (7% discount) - Keywords: beach, luxury, rental - 2BR beachfront apartment
-6. Arabian Ranches Villa - AED 2,800,000 (6% discount) - Keywords: family, community, spacious - 3BR family villa
-7. Dubai Marina Apartment - AED 1,800,000 (7% discount) - Keywords: waterfront, luxury, modern - 2BR marina view apartment
-8. Jumeirah Villa - AED 6,500,000 (6% discount) - Keywords: beach, luxury, traditional - 4BR traditional beach villa
+1. Downtown Dubai Apartment - AED 1,500,000  - Keywords: luxury, city, views - 2BR apartment with city views
+2. Palm Jumeirah Villa - AED 8,500,000  - Keywords: beachfront, luxury, villa - 5BR beachfront villa
+3. Dubai Hills Villa - AED 3,200,000 - Keywords: golf, family, modern - 4BR villa with golf course access
+4. Business Bay Apartment - AED 1,200,000  - Keywords: commercial, modern, investment - 1BR modern apartment
+5. JBR Apartment - AED 2,100,000 - Keywords: beach, luxury, rental - 2BR beachfront apartment
+6. Arabian Ranches Villa - AED 2,800,000 - Keywords: family, community, spacious - 3BR family villa
+7. Dubai Marina Apartment - AED 1,800,000 - Keywords: waterfront, luxury, modern - 2BR marina view apartment
+8. Jumeirah Villa - AED 6,500,000 - Keywords: beach, luxury, traditional - 4BR traditional beach villa
 
 EXAMPLE RESPONSES:
 - "Thank you for providing your contact information, ${session.userName}! Now that I have your details, I can better assist you with your real estate needs. Based on our previous conversation, would you like me to provide more specific information about any properties that interest you?"
@@ -223,10 +241,9 @@ app.post('/api/chatbot/message', async (req, res) => {
     // Initialize session data if it doesn't exist
     if (!sessionData[sessionId]) {
       sessionData[sessionId] = {
-        questionCount: 0,
         userName: null,
         userContact: null,
-        conversationStage: 'questions',
+        conversationStage: 'welcome',
         conversationHistory: [] // Store actual conversation messages
       };
     }
@@ -246,27 +263,28 @@ app.post('/api/chatbot/message', async (req, res) => {
     });
     
     // Handle conversation flow logic
-    if (session.conversationStage === 'questions' && session.questionCount < 4) {
-      // Count this as a question
-      session.questionCount++;
-      console.log(`   📊 Question count: ${session.questionCount}/4`);
+    if (session.conversationStage === 'welcome') {
+      // After first user message, move to properties stage
+      session.conversationStage = 'properties';
+      console.log(`   🔄 Moving to properties stage`);
       
-    } else if (session.conversationStage === 'questions' && session.questionCount >= 4) {
-      // After 4 questions, move to name collection stage
-      session.conversationStage = 'name';
-      console.log(`   🔄 Moving to name collection stage`);
+    } else if (session.conversationStage === 'properties') {
+      // Stay in properties stage for detailed information
+      console.log(`   📊 Providing property details`);
       
-    } else if (session.conversationStage === 'name') {
-      // Store the name and move to contact collection
-      session.userName = message.trim();
-      session.conversationStage = 'contact';
-      console.log(`   👤 Name collected: ${session.userName}`);
-      
-    } else if (session.conversationStage === 'contact') {
-      // Store the contact and move to continue stage
-      session.userContact = message.trim();
-      session.conversationStage = 'continue';
-      console.log(`   📞 Contact collected: ${session.userContact}`);
+    } else if (session.conversationStage === 'contact_form') {
+      // Handle contact form submission
+      if (message.toLowerCase().includes('name') || message.toLowerCase().includes('contact')) {
+        // This is likely a name or contact, store it
+        if (!session.userName) {
+          session.userName = message.trim();
+          console.log(`   👤 Name collected: ${session.userName}`);
+        } else if (!session.userContact) {
+          session.userContact = message.trim();
+          session.conversationStage = 'continue';
+          console.log(`   📞 Contact collected: ${session.userContact}`);
+        }
+      }
     }
 
     // Get ChatGPT response
@@ -282,6 +300,17 @@ app.post('/api/chatbot/message', async (req, res) => {
       timestamp: new Date().toISOString()
     });
 
+    // Determine if we should show action buttons
+    let showButtons = false;
+    if (session.conversationStage === 'properties' && session.conversationHistory.length > 2) {
+      showButtons = true;
+    }
+    
+    // Don't show buttons if user has already submitted contact form
+    if (session.conversationStage === 'continue' || session.conversationStage === 'contact_form') {
+      showButtons = false;
+    }
+    
     // Store chat history
     const chatEntry = {
       id: Date.now(),
@@ -290,8 +319,7 @@ app.post('/api/chatbot/message', async (req, res) => {
       botResponse: response,
       matchedKeyword: 'chatgpt',
       timestamp: new Date().toISOString(),
-      conversationStage: session.conversationStage,
-      questionCount: session.questionCount
+      conversationStage: session.conversationStage
     };
     
     chatHistory.push(chatEntry);
@@ -305,7 +333,8 @@ app.post('/api/chatbot/message', async (req, res) => {
     console.log(`   🔍 Processing: "${message}"`);
     console.log(`   🎯 Response source: ChatGPT API`);
     console.log(`   💬 Response: "${response}"`);
-    console.log(`   📈 Stage: ${session.conversationStage}, Questions: ${session.questionCount}`);
+    console.log(`   📈 Stage: ${session.conversationStage}`);
+    console.log(`   🔘 Show buttons: ${showButtons}`);
 
     // Simulate typing delay
     setTimeout(() => {
@@ -317,7 +346,7 @@ app.post('/api/chatbot/message', async (req, res) => {
         timestamp: chatEntry.timestamp,
         matchedKeyword: 'chatgpt',
         conversationStage: session.conversationStage,
-        questionCount: session.questionCount
+        showButtons: showButtons
       });
     }, 1000 + Math.random() * 1000); // 1-2 second delay
 
@@ -402,35 +431,124 @@ app.post('/api/chatbot/quick-action', async (req, res) => {
   }
 });
 
+// Button action endpoint
+app.post('/api/chatbot/button-action', async (req, res) => {
+  try {
+    const { action, sessionId } = req.body;
+    
+    // Log incoming button action
+    console.log(`\n🔘 [${new Date().toLocaleTimeString()}] Button action triggered:`);
+    console.log(`   Session ID: ${sessionId || 'default'}`);
+    console.log(`   Action: "${action}"`);
+    
+    // Initialize session data if it doesn't exist
+    if (!sessionData[sessionId]) {
+      sessionData[sessionId] = {
+        userName: null,
+        userContact: null,
+        conversationStage: 'welcome',
+        conversationHistory: []
+      };
+    }
+    
+    const session = sessionData[sessionId];
+    let response = '';
+    let showContactForm = false;
+    
+    if (action === 'schedule_call') {
+      // Handle schedule call action
+      response = "I'd be happy to help you schedule a call with our sales team! Please provide your contact information below so our team can reach out to you soon.";
+      session.conversationStage = 'contact_form';
+      showContactForm = true;
+      console.log(`   📞 Schedule call requested - showing contact form`);
+      
+    } else if (action === 'more_details') {
+      // Handle more details action
+      response = "Here are more detailed information about our properties:\n\n" +
+        "🏠 **LAND PROPERTIES:**\n" +
+        "• Dubai Hills Estate Land - AED 2,500,000  - Prime location with golf course views, perfect for luxury villa development\n" +
+        "• Business Bay Plot - AED 1,800,000  - Commercial development opportunity in downtown Dubai\n" +
+        "• Jumeirah Village Land - AED 1,200,000  - Upcoming residential area with great growth potential\n" +
+        "• Dubai Marina Plot - AED 3,200,000 - Waterfront development land with premium location\n" +
+        "• Arabian Ranches Land - AED 2,800,000  - Villa community development with family-friendly environment\n\n" +
+        "🏡 **HOME PROPERTIES:**\n" +
+        "• Downtown Dubai Apartment - AED 1,500,000 (7% High ROI) - 2BR apartment with stunning city views\n" +
+        "• Palm Jumeirah Villa - AED 8,500,000 (8% High ROI) - 5BR beachfront villa with private beach access\n" +
+        "• Dubai Hills Villa - AED 3,200,000 (6% High ROI) - 4BR villa with golf course access\n" +
+        "• Business Bay Apartment - AED 1,200,000 (7% High ROI) - 1BR modern apartment for investment\n" +
+        "• JBR Apartment - AED 2,100,000 (7% High ROI) - 2BR beachfront apartment with rental potential\n" +
+        "• Arabian Ranches Villa - AED 2,800,000 (6% High ROI) - 3BR family villa in gated community\n" +
+        "• Dubai Marina Apartment - AED 1,800,000 (7% High ROI) - 2BR marina view apartment\n" +
+        "• Jumeirah Villa - AED 6,500,000 (6% High ROI) - 4BR traditional beach villa\n\n" +
+        "All properties come with special discounts and our team can provide more specific details about any property that interests you!";
+      console.log(`   📋 More details provided`);
+    }
+    
+    // Store button action in history
+    const chatEntry = {
+      id: Date.now(),
+      sessionId: sessionId || 'default',
+      userMessage: `[Button Action: ${action}]`,
+      botResponse: response,
+      matchedKeyword: action,
+      timestamp: new Date().toISOString()
+    };
+    
+    chatHistory.push(chatEntry);
+    
+    console.log(`   💬 Response: "${response}"`);
+    console.log(`   ✅ Sending button action response to session: ${sessionId || 'default'}`);
+
+    res.json({
+      success: true,
+      response: response,
+      action: action,
+      sessionId: sessionId,
+      timestamp: chatEntry.timestamp,
+      conversationStage: session.conversationStage,
+      showContactForm: showContactForm
+    });
+
+  } catch (error) {
+    console.error('❌ Button action error:', error);
+    res.status(500).json({
+      error: 'Failed to process button action'
+    });
+  }
+});
+
 // Contact collection endpoint
 app.post('/api/chatbot/contact', async (req, res) => {
   try {
-    const { name, email, phone, property, sessionId } = req.body;
+    const { name, phone, sessionId } = req.body;
     
     console.log(`\n📞 [${new Date().toLocaleTimeString()}] Contact information collected:`);
     console.log(`   Session ID: ${sessionId || 'default'}`);
     console.log(`   Name: ${name}`);
-    console.log(`   Email: ${email}`);
     console.log(`   Phone: ${phone}`);
-    console.log(`   Property: ${property || 'Not specified'}`);
     
     // Store contact information (in production, save to database)
     const contactEntry = {
       id: Date.now(),
       sessionId: sessionId || 'default',
       name: name,
-      email: email,
       phone: phone,
-      property: property || 'Not specified',
       timestamp: new Date().toISOString()
     };
+    
+    // Update session data
+    if (sessionData[sessionId]) {
+      sessionData[sessionId].userName = name;
+      sessionData[sessionId].userContact = phone;
+      sessionData[sessionId].conversationStage = 'continue';
+    }
     
     // In production, save to database
     console.log(`   ✅ Contact information stored for session: ${sessionId || 'default'}`);
     
     res.json({
       success: true,
-      message: 'Thank you for your information! Our team will contact you soon.',
+      message: 'Our sales team will contact you soon',
       contactId: contactEntry.id,
       timestamp: contactEntry.timestamp
     });
