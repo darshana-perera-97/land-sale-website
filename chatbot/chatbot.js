@@ -4,8 +4,8 @@ class FloatingChatbot {
     this.isOpen = false;
     this.messages = [];
     this.sessionId = this.generateSessionId();
-    // this.apiUrl = 'http://localhost:3001/api/chatbot';
-    this.apiUrl = 'https://alras.nexgenai.asia/api/chatbot';
+    this.apiUrl = 'http://localhost:3001/api/chatbot';
+    // this.apiUrl = 'https://alras.nexgenai.asia/api/chatbot';
     // this.apiUrl = 'http://localhost:3000/api/chatbot';   https://landsale-backend.nexgenai.asia/api/health
     this.conversationStage = 'welcome';
     this.init();
@@ -96,7 +96,9 @@ class FloatingChatbot {
     
     const messageContent = document.createElement('div');
     messageContent.className = 'message-content';
-    messageContent.innerHTML = `<p>${content}</p>`;
+    // Replace newlines with <br> tags to preserve line breaks
+    const formattedContent = content.replace(/\n/g, '<br>');
+    messageContent.innerHTML = `<p>${formattedContent}</p>`;
     
     messageDiv.appendChild(avatar);
     messageDiv.appendChild(messageContent);

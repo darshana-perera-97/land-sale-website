@@ -1392,8 +1392,8 @@
 
     // Popup Chatbot Functions
     let popupSessionId = 'popup_session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-    const popupApiUrl = 'https://alras.nexgenai.asia/api/chatbot';
-    // const popupApiUrl = 'http://localhost:3001/api/chatbot';
+    // const popupApiUrl = 'https://alras.nexgenai.asia/api/chatbot';
+    const popupApiUrl = 'http://localhost:3001/api/chatbot';
     // const popupApiUrl = 'https://landsale-backend.nexgenai.asia/api/chatbot';
 
     // Popup conversation flow tracking
@@ -1547,7 +1547,9 @@
 
       const messageContent = document.createElement('div');
       messageContent.className = 'chatbot-popup-message-content';
-      messageContent.innerHTML = `<p>${content}</p>`;
+      // Replace newlines with <br> tags to preserve line breaks
+      const formattedContent = content.replace(/\n/g, '<br>');
+      messageContent.innerHTML = `<p>${formattedContent}</p>`;
 
       messageDiv.appendChild(avatar);
       messageDiv.appendChild(messageContent);

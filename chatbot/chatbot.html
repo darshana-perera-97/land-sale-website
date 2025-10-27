@@ -516,7 +516,9 @@ class FloatingChatbot {
     
     const messageContent = document.createElement('div');
     messageContent.className = 'message-content';
-    messageContent.innerHTML = `<p>${content}</p>`;
+    // Replace newlines with <br> tags to preserve line breaks
+    const formattedContent = content.replace(/\n/g, '<br>');
+    messageContent.innerHTML = `<p>${formattedContent}</p>`;
     
     messageDiv.appendChild(avatar);
     messageDiv.appendChild(messageContent);
