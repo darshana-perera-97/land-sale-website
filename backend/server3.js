@@ -467,6 +467,9 @@ app.post('/api/chatbot/button-action', async (req, res) => {
       
     } else if (action === 'more_details') {
       // Handle more details action
+      const landImageUrl = 'https://knightknox.com/wp-content/uploads/2024/08/shutterstock_2145960225-1.jpg-1024x691.webp';
+      const homeImageUrl = 'https://auraventures.ae/wp-content/uploads/2024/02/rent-a-property-in-dubai-uae-best-roi.jpg';
+      
       response = "Here are more detailed information about our properties:\n\n" +
         "🏠 **LAND PROPERTIES:**\n" +
         "• Dubai Hills Estate Land - AED 2,500,000  - Prime location with golf course views, perfect for luxury villa development\n" +
@@ -474,6 +477,7 @@ app.post('/api/chatbot/button-action', async (req, res) => {
         "• Jumeirah Village Land - AED 1,200,000  - Upcoming residential area with great growth potential\n" +
         "• Dubai Marina Plot - AED 3,200,000 - Waterfront development land with premium location\n" +
         "• Arabian Ranches Land - AED 2,800,000  - Villa community development with family-friendly environment\n\n" +
+        `[LAND_IMAGE:${landImageUrl}]\n\n` +
         "🏡 **HOME PROPERTIES:**\n" +
         "• Downtown Dubai Apartment - AED 1,500,000 (7% High ROI) - 2BR apartment with stunning city views\n" +
         "• Palm Jumeirah Villa - AED 8,500,000 (8% High ROI) - 5BR beachfront villa with private beach access\n" +
@@ -483,6 +487,7 @@ app.post('/api/chatbot/button-action', async (req, res) => {
         "• Arabian Ranches Villa - AED 2,800,000 (6% High ROI) - 3BR family villa in gated community\n" +
         "• Dubai Marina Apartment - AED 1,800,000 (7% High ROI) - 2BR marina view apartment\n" +
         "• Jumeirah Villa - AED 6,500,000 (6% High ROI) - 4BR traditional beach villa\n\n" +
+        `[HOME_IMAGE:${homeImageUrl}]\n\n` +
         "All properties come with special discounts and our team can provide more specific details about any property that interests you!";
       console.log(`   📋 More details provided`);
     }

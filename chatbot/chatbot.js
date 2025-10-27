@@ -96,8 +96,22 @@ class FloatingChatbot {
     
     const messageContent = document.createElement('div');
     messageContent.className = 'message-content';
+    
     // Replace newlines with <br> tags to preserve line breaks
-    const formattedContent = content.replace(/\n/g, '<br>');
+    let formattedContent = content.replace(/\n/g, '<br>');
+    
+    // Handle image markers and replace with img tags
+    const landImageRegex = /\[LAND_IMAGE:(.*?)\]/g;
+    const homeImageRegex = /\[HOME_IMAGE:(.*?)\]/g;
+    
+    formattedContent = formattedContent.replace(landImageRegex, (match, url) => {
+      return `<img src="${url}" alt="Land Property" style="max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0;" />`;
+    });
+    
+    formattedContent = formattedContent.replace(homeImageRegex, (match, url) => {
+      return `<img src="${url}" alt="Home Property" style="max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0;" />`;
+    });
+    
     messageContent.innerHTML = `<p>${formattedContent}</p>`;
     
     messageDiv.appendChild(avatar);

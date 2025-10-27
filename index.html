@@ -1438,7 +1438,7 @@
               if (data.conversationStage) {
                 popupConversationStage = data.conversationStage;
               }
-              
+
               // Check if we need to add action buttons
               if (data.showButtons) {
                 addPopupActionButtons();
@@ -1484,7 +1484,7 @@
       messageDiv.appendChild(messageContent);
 
       messagesContainer.appendChild(messageDiv);
-      
+
       // Don't add buttons automatically - let the backend control when to show them
     }
 
@@ -1520,7 +1520,7 @@
             if (data.conversationStage) {
               popupConversationStage = data.conversationStage;
             }
-            
+
             // Check if we need to add action buttons
             if (data.showButtons) {
               addPopupActionButtons();
@@ -1547,8 +1547,22 @@
 
       const messageContent = document.createElement('div');
       messageContent.className = 'chatbot-popup-message-content';
+      
       // Replace newlines with <br> tags to preserve line breaks
-      const formattedContent = content.replace(/\n/g, '<br>');
+      let formattedContent = content.replace(/\n/g, '<br>');
+      
+      // Handle image markers and replace with img tags
+      const landImageRegex = /\[LAND_IMAGE:(.*?)\]/g;
+      const homeImageRegex = /\[HOME_IMAGE:(.*?)\]/g;
+      
+      formattedContent = formattedContent.replace(landImageRegex, (match, url) => {
+        return `<img src="${url}" alt="Land Property" style="max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0;" />`;
+      });
+      
+      formattedContent = formattedContent.replace(homeImageRegex, (match, url) => {
+        return `<img src="${url}" alt="Home Property" style="max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0;" />`;
+      });
+      
       messageContent.innerHTML = `<p>${formattedContent}</p>`;
 
       messageDiv.appendChild(avatar);
@@ -1567,7 +1581,7 @@
         console.log('Popup action buttons already exist, skipping...');
         return;
       }
-      
+
       const actionDiv = document.createElement('div');
       actionDiv.className = 'chatbot-popup-action-buttons';
 
@@ -1597,7 +1611,7 @@
       try {
         // Show typing indicator
         showPopupTypingIndicator();
-        
+
         // Send button action to backend
         const response = await fetch(`${popupApiUrl}/button-action`, {
           method: 'POST',
@@ -1611,18 +1625,18 @@
         });
 
         const data = await response.json();
-        
+
         // Hide typing indicator
         hidePopupTypingIndicator();
-        
+
         if (data.success) {
           addPopupMessage(data.response);
-          
+
           // Update conversation state from backend response
           if (data.conversationStage) {
             popupConversationStage = data.conversationStage;
           }
-          
+
           // Check if we need to show contact form
           if (data.showContactForm) {
             showPopupContactForm();
@@ -1654,11 +1668,11 @@
           </form>
         </div>
       `;
-      
+
       const messagesContainer = document.getElementById('chatbot-popup-messages');
       messagesContainer.appendChild(contactFormDiv);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      
+
       // Bind form submission
       const form = contactFormDiv.querySelector('#popup-contact-form');
       form.addEventListener('submit', (e) => {
@@ -1673,7 +1687,7 @@
         phone: form.querySelector('#popup-contact-phone').value,
         sessionId: popupSessionId
       };
-      
+
       try {
         const response = await fetch(`${popupApiUrl}/contact`, {
           method: 'POST',
@@ -1682,9 +1696,9 @@
           },
           body: JSON.stringify(contactData)
         });
-        
+
         const data = await response.json();
-        
+
         if (data.success) {
           addPopupMessage(data.message);
           // Remove the contact form
@@ -1723,7 +1737,7 @@
           if (data.conversationStage) {
             popupConversationStage = data.conversationStage;
           }
-          
+
           // Check if we need to add action buttons
           if (data.showButtons) {
             addPopupActionButtons();
