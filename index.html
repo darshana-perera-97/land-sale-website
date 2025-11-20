@@ -308,6 +308,13 @@
       box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
     }
 
+    .testimonial-video-wrapper {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+      background: #ffffff;
+    }
+
     /* Popup Contact Form */
     .chatbot-popup-contact-form {
       margin: 10px 0;
@@ -1003,6 +1010,17 @@
           </div>
         </div>
       </div>
+      <div class="row mb-5">
+        <div class="col-lg-10 offset-lg-1">
+          <div class="testimonial-video-wrapper ratio ratio-16x9">
+            <iframe id="testimonialVideo"
+              src="https://www.youtube.com/embed/jMR7R2ZFbcU?enablejsapi=1&rel=0&controls=1&mute=1"
+              title="ALRAS Real Estate Showcase"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-lg-8 offset-lg-2">
           <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -1383,6 +1401,24 @@
 
       // Initialize
       updateActiveNavLink();
+
+      // Auto-play testimonial video on scroll
+      const testimonialVideo = document.getElementById('testimonialVideo');
+      if (testimonialVideo && 'IntersectionObserver' in window) {
+        const videoObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && testimonialVideo.dataset.autoplayed !== 'true') {
+              // Ensure the video starts muted for autoplay compliance
+              testimonialVideo.contentWindow.postMessage('{"event":"command","func":"mute","args":""}', '*');
+              testimonialVideo.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+              testimonialVideo.dataset.autoplayed = 'true';
+              observer.unobserve(testimonialVideo);
+            }
+          });
+        }, { threshold: 0.6 });
+
+        videoObserver.observe(testimonialVideo);
+      }
     });
 
     function scrollToProperties(event) {
