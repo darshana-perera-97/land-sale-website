@@ -45,11 +45,11 @@ async function getChatGPTResponse(userMessage, sessionId) {
     // Determine conversation stage and create appropriate prompt
     if (session.conversationStage === 'welcome') {
       // Welcome stage - provide property information
-      systemPrompt = `You are a real estate chatbot assistant for CEYLON REAL ESTATE.
+      systemPrompt = `You are a real estate chatbot assistant for CEYLON STAR REAL ESTATE.
 
 CONVERSATION STAGE: Welcome and Property Information
 
-COMPANY: CEYLON REAL ESTATE - Premium Real Estate Solutions
+COMPANY: CEYLON STAR REAL ESTATE - Premium Real Estate Solutions
 
 AVAILABLE PROPERTIES:
 
@@ -78,15 +78,15 @@ INSTRUCTIONS:
 - When listing properties, format them with bullet points (•) and line breaks for readability
 - After providing property information, indicate that action buttons will appear for next steps
 
-RESPONSE EXAMPLE: "Welcome to CEYLON REAL ESTATE! We offer premium land and home properties across Dubai with exclusive discounts. Our portfolio includes luxury villas in Palm Jumeirah, modern apartments in Downtown Dubai, and prime land plots in Dubai Hills Estate and Business Bay. All properties come with special discounts ranging from 5-8%. How can I assist you today?"`;
+RESPONSE EXAMPLE: "Welcome to CEYLON STAR REAL ESTATE! We offer premium land and home properties across Dubai with exclusive discounts. Our portfolio includes luxury villas in Palm Jumeirah, modern apartments in Downtown Dubai, and prime land plots in Dubai Hills Estate and Business Bay. All properties come with special discounts ranging from 5-8%. How can I assist you today?"`;
       
     } else if (session.conversationStage === 'properties') {
       // Properties stage - provide detailed property information
-      systemPrompt = `You are a real estate chatbot assistant for CEYLON REAL ESTATE.
+      systemPrompt = `You are a real estate chatbot assistant for CEYLON STAR REAL ESTATE.
 
 CONVERSATION STAGE: Providing Detailed Property Information
 
-COMPANY: CEYLON REAL ESTATE - Premium Real Estate Solutions
+COMPANY: CEYLON STAR REAL ESTATE - Premium Real Estate Solutions
 
 AVAILABLE PROPERTIES:
 
@@ -122,7 +122,7 @@ RESPONSE EXAMPLE: "Here are more details about our properties: [Provide specific
         session.conversationHistory.slice(-4).map(msg => msg.content).join(', ') : 
         'No previous questions recorded';
       
-      systemPrompt = `You are a real estate chatbot assistant for CEYLON REAL ESTATE.
+      systemPrompt = `You are a real estate chatbot assistant for CEYLON STAR REAL ESTATE.
 
 CONVERSATION STAGE: Continuing conversation with user details
 
