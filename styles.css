@@ -2043,6 +2043,154 @@ section {
   padding-bottom: 100px;
 }
 
+/* Blog Section Styles */
+.blog-section {
+  background: #ffffff;
+}
+
+.blog-item {
+  background: #ffffff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #f0f0f0;
+}
+
+.blog-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  border-color: #dfa974;
+}
+
+.blog-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+
+.blog-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.blog-item:hover .blog-image img {
+  transform: scale(1.1);
+}
+
+.blog-content {
+  padding: 30px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-meta {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  color: #595960;
+  font-family: 'Poppins', sans-serif;
+}
+
+.blog-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.blog-meta i {
+  color: #dfa974;
+  font-size: 12px;
+}
+
+.blog-content h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #19191a;
+  margin-bottom: 15px;
+  line-height: 1.3;
+}
+
+.blog-content p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  color: #595960;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.blog-content .primary-btn {
+  align-self: flex-start;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 30px;
+  background: #dfa974;
+  color: #ffffff;
+  border: 2px solid #dfa974;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.blog-content .primary-btn:hover {
+  background: transparent;
+  color: #dfa974;
+  transform: translateX(5px);
+}
+
+.blog-content .primary-btn i {
+  font-size: 12px;
+  transition: transform 0.3s ease;
+}
+
+.blog-content .primary-btn:hover i {
+  transform: translateX(3px);
+}
+
+/* Blog Section Mobile Responsive */
+@media (max-width: 768px) {
+  .blog-section {
+    padding: 60px 0;
+  }
+
+  .blog-image {
+    height: 200px;
+  }
+
+  .blog-content {
+    padding: 20px;
+  }
+
+  .blog-content h3 {
+    font-size: 20px;
+  }
+
+  .blog-content p {
+    font-size: 14px;
+  }
+
+  .blog-meta {
+    font-size: 12px;
+    gap: 15px;
+  }
+}
+
 /* Room Section Styles */
 .hp-room-section {
   background: #ffffff;
