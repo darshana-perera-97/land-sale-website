@@ -4,6 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Explore Dubai real estate insights, market trends, and investment guides. Expert analysis on property investment, Golden Visa benefits, and market predictions." />
+  <link rel="canonical" href="https://ceylonrealestate.ae/blog.html" />
+  <link rel="alternate" hreflang="en" href="https://ceylonrealestate.ae/blog.html" />
+  <link rel="alternate" hreflang="x-default" href="https://ceylonrealestate.ae/blog.html" />
   <title>Blog - CEYLON STAR REAL ESTATE</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,477 +20,6 @@
 
   <!-- Chatbot CSS -->
   <link rel="stylesheet" href="chatbot/chatbot.css">
-  <style>
-    html,
-    body {
-      width: 100vw;
-      max-width: 100vw;
-      overflow-x: hidden;
-    }
-
-    .container-fluid {
-      width: 100vw;
-      max-width: 100vw;
-    }
-
-    /* Blog Page Hero Section */
-    .blog-hero-section {
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
-        url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
-      padding: 180px 0 100px;
-      text-align: center;
-      color: #ffffff;
-    }
-
-    .blog-hero-section h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 56px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: #ffffff;
-    }
-
-    .blog-hero-section p {
-      font-size: 18px;
-      max-width: 600px;
-      margin: 0 auto;
-      opacity: 0.9;
-    }
-
-    /* Blog Page Layout */
-    .blog-page-section {
-      padding: 80px 0;
-      background: #f8f9fa;
-    }
-
-    .blog-main-content {
-      padding-right: 0;
-    }
-    
-    .blog-main-content .row {
-      display: flex;
-      flex-wrap: wrap;
-    }
-    
-    .blog-main-content .row > [class*="col-"] {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .blog-sidebar {
-      padding-left: 30px;
-    }
-
-    /* Blog Post Card - Full Width */
-    .blog-post-card {
-      background: #ffffff;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      margin-bottom: 40px;
-      transition: all 0.3s ease;
-      border: 1px solid #f0f0f0;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      text-decoration: none;
-      color: inherit;
-      cursor: pointer;
-    }
-
-    .blog-post-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .blog-post-image {
-      width: 100%;
-      height: 250px;
-      overflow: hidden;
-    }
-
-    .blog-post-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .blog-post-card:hover .blog-post-image img {
-      transform: scale(1.1);
-    }
-
-    .blog-post-body {
-      padding: 25px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .blog-post-meta {
-      display: flex;
-      gap: 25px;
-      margin-bottom: 20px;
-      font-size: 14px;
-      color: #595960;
-      font-family: 'Poppins', sans-serif;
-      flex-wrap: wrap;
-    }
-
-    .blog-post-meta span {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .blog-post-meta i {
-      color: #dfa974;
-      font-size: 14px;
-    }
-
-    .blog-post-body h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 22px;
-      font-weight: 600;
-      color: #19191a;
-      margin-bottom: 15px;
-      line-height: 1.3;
-    }
-
-    .blog-post-body h2 a {
-      color: #19191a;
-      text-decoration: none;
-      transition: color 0.3s ease;
-      pointer-events: none;
-    }
-
-    .blog-post-body h2 a:hover {
-      color: #dfa974;
-    }
-    
-    .blog-post-card-link {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      text-decoration: none;
-      color: inherit;
-    }
-    
-    .blog-post-card-link:hover {
-      text-decoration: none;
-      color: inherit;
-    }
-    
-    .primary-btn {
-      pointer-events: none;
-      margin-top: auto;
-    }
-
-    .blog-post-body p {
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      color: #595960;
-      line-height: 1.6;
-      margin-bottom: 15px;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .blog-post-tags {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 25px;
-    }
-
-    .blog-tag {
-      background: #f8f9fa;
-      color: #595960;
-      padding: 6px 15px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      transition: all 0.3s ease;
-    }
-
-    .blog-tag:hover {
-      background: #dfa974;
-      color: #ffffff;
-    }
-
-    /* Sidebar Styles */
-    .sidebar-widget {
-      background: #ffffff;
-      border-radius: 15px;
-      padding: 30px;
-      margin-bottom: 30px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-      border: 1px solid #f0f0f0;
-    }
-
-    .sidebar-widget h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 24px;
-      font-weight: 600;
-      color: #19191a;
-      margin-bottom: 25px;
-      padding-bottom: 15px;
-      border-bottom: 2px solid #f0f0f0;
-    }
-
-    .sidebar-search {
-      position: relative;
-    }
-
-    .sidebar-search input {
-      width: 100%;
-      padding: 12px 45px 12px 15px;
-      border: 2px solid #e5e5e5;
-      border-radius: 25px;
-      font-size: 14px;
-      font-family: 'Poppins', sans-serif;
-      outline: none;
-      transition: border-color 0.3s ease;
-    }
-
-    .sidebar-search input:focus {
-      border-color: #dfa974;
-    }
-
-    .sidebar-search button {
-      position: absolute;
-      right: 5px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #dfa974;
-      color: #ffffff;
-      border: none;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
-
-    .sidebar-search button:hover {
-      background: #c8965a;
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .sidebar-categories ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .sidebar-categories li {
-      padding: 12px 0;
-      border-bottom: 1px solid #f0f0f0;
-    }
-
-    .sidebar-categories li:last-child {
-      border-bottom: none;
-    }
-
-    .sidebar-categories a {
-      color: #595960;
-      text-decoration: none;
-      font-family: 'Poppins', sans-serif;
-      font-size: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: color 0.3s ease;
-    }
-
-    .sidebar-categories a:hover {
-      color: #dfa974;
-    }
-
-    .sidebar-categories span {
-      background: #f8f9fa;
-      color: #595960;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .sidebar-recent-posts .recent-post-item {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 20px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #f0f0f0;
-    }
-
-    .sidebar-recent-posts .recent-post-item:last-child {
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-
-    .recent-post-image {
-      width: 80px;
-      height: 80px;
-      border-radius: 10px;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .recent-post-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .recent-post-content h4 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: #19191a;
-      margin-bottom: 8px;
-      line-height: 1.3;
-    }
-
-    .recent-post-content h4 a {
-      color: #19191a;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .recent-post-content h4 a:hover {
-      color: #dfa974;
-    }
-
-    .recent-post-content span {
-      font-size: 12px;
-      color: #595960;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .sidebar-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    /* Pagination */
-    .blog-pagination {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 50px;
-    }
-
-    .pagination-btn {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      border: 2px solid #e5e5e5;
-      background: #ffffff;
-      color: #595960;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .pagination-btn:hover,
-    .pagination-btn.active {
-      background: #dfa974;
-      border-color: #dfa974;
-      color: #ffffff;
-      transform: translateY(-2px);
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-      .blog-hero-section {
-        padding: 120px 0 60px;
-      }
-
-      .blog-hero-section h1 {
-        font-size: 32px;
-      }
-
-      .blog-hero-section p {
-        font-size: 16px;
-      }
-
-      .blog-main-content {
-        padding-right: 0;
-      }
-
-      .blog-sidebar {
-        padding-left: 0;
-        margin-top: 40px;
-      }
-
-      .blog-post-image {
-        height: 200px;
-      }
-
-      .blog-post-body {
-        padding: 20px;
-      }
-
-      .blog-post-body h2 {
-        font-size: 20px;
-      }
-      
-      .blog-post-body p {
-        font-size: 13px;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-      }
-    }
-
-    /* Mobile Footer Copyright Centering */
-    @media (max-width: 768px) {
-      .co-text p {
-        text-align: center !important;
-      }
-    }
-
-    /* Mobile Logo Display */
-    .mobile-logo {
-      display: none;
-    }
-
-    .desktop-logo {
-      display: block;
-    }
-
-    @media (max-width: 768px) {
-      .mobile-logo {
-        display: block;
-        margin-right: 25px;
-      }
-
-      .desktop-logo {
-        display: none;
-      }
-
-      .modern-navbar .container {
-        padding-left: 30px;
-        padding-right: 20px;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -553,22 +86,22 @@
             <div class="row">
             <!-- Blog Post 1 -->
             <div class="col-lg-4 col-md-6 mb-4">
-            <a href="blog-post.html" class="blog-post-card-link">
+            <a href="posts/Why_Dubai_is_the_Ultimate_Global_Investment_Frontier_A_Guide_by_Ceylon_Star_Real_Estate.html" class="blog-post-card-link">
             <article class="blog-post-card">
               <div class="blog-post-image">
-                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dubai Real Estate Market">
+                <img src="Assets/Why_Dubai_is_the_Ultimate_Global_Investment_Frontier_A_Guide_by_Ceylon_Star_Real_Estate.jpg" alt="Why Dubai is the Ultimate Global Investment Frontier">
               </div>
               <div class="blog-post-body">
                 <div class="blog-post-meta">
                   <span><i class="fas fa-calendar-alt"></i> March 15, 2024</span>
                 </div>
-                <h2><span style="color: #19191a;">Dubai Real Estate Market Trends 2024</span></h2>
-                <p>Explore the latest trends shaping Dubai's real estate market in 2024. From luxury waterfront properties to affordable housing solutions, discover what's driving the market this year. The Dubai real estate sector continues to evolve with new developments, innovative architectural designs, and sustainable building practices that are setting new standards in the industry.</p>
-                <p>The market is experiencing significant growth in both residential and commercial sectors, with particular strength in luxury properties and sustainable developments. Investors and homebuyers alike are finding value in Dubai's strategic location, world-class infrastructure, and favorable investment climate.</p>
+                <h2><span style="color: #19191a;">Why Dubai is the Ultimate Global Investment Frontier</span></h2>
+                <p>Discover why Dubai outperforms other global capitals with 5%–9% yields, a tax-free environment, and a booming expat population driving sustained demand.</p>
+                <p>Learn how Golden Visas, world-class safety and infrastructure, and Ceylon Star Real Estate’s local expertise make Dubai the destination for serious investors.</p>
                 <div class="blog-post-tags">
-                  <span class="blog-tag">Market Trends</span>
+                  <span class="blog-tag">Investment</span>
                   <span class="blog-tag">Dubai</span>
-                  <span class="blog-tag">Real Estate</span>
+                  <span class="blog-tag">Golden Visa</span>
                 </div>
                 <span class="primary-btn">Read More <i class="fas fa-arrow-right"></i></span>
               </div>
@@ -578,22 +111,22 @@
 
             <!-- Blog Post 2 -->
             <div class="col-lg-4 col-md-6 mb-4">
-            <a href="blog-post.html" class="blog-post-card-link">
+            <a href="posts/Dubai_vs_Colombo_Port_City_A_Comparative_Investment_Analysis.html" class="blog-post-card-link">
             <article class="blog-post-card">
               <div class="blog-post-image">
-                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Investment Guide">
+                <img src="Assets/Dubai_vs_Colombo_Port_City_A_Comparative_Investment_Analysis.jpg" alt="Dubai vs Colombo Port City">
               </div>
               <div class="blog-post-body">
                 <div class="blog-post-meta">
-                  <span><i class="fas fa-calendar-alt"></i> March 10, 2024</span>
+                  <span><i class="fas fa-calendar-alt"></i> March 20, 2025</span>
                 </div>
-                <h2><span style="color: #19191a;">Complete Guide to Real Estate Investment in Dubai</span></h2>
-                <p>Learn everything you need to know about investing in Dubai's real estate market. From legal requirements to ROI expectations, this comprehensive guide covers all aspects of property investment. Whether you're a first-time investor or looking to expand your portfolio, understanding the Dubai market dynamics is crucial for success.</p>
-                <p>We'll cover key topics including property types, investment strategies, financing options, legal frameworks, and market analysis. Discover how to identify profitable opportunities and navigate the investment process with confidence.</p>
+                <h2><span style="color: #19191a;">Dubai vs. Colombo Port City: A Comparative Investment Analysis</span></h2>
+                <p>Compare Dubai's proven stability with Colombo Port City's ground-floor opportunity. Discover how these two hubs complement a diversified portfolio for Sri Lankan expats and global investors.</p>
+                <p>Explore ROI comparisons, 2025 tax frameworks, visa benefits, and strategic diversification strategies. Learn why smart investors hold both the Golden Visa and Primary BSI status.</p>
                 <div class="blog-post-tags">
-                  <span class="blog-tag">Investment</span>
-                  <span class="blog-tag">Guide</span>
+                  <span class="blog-tag">Investment Analysis</span>
                   <span class="blog-tag">Dubai</span>
+                  <span class="blog-tag">Colombo Port City</span>
                 </div>
                 <span class="primary-btn">Read More <i class="fas fa-arrow-right"></i></span>
               </div>
@@ -603,22 +136,22 @@
 
             <!-- Blog Post 3 -->
             <div class="col-lg-4 col-md-6 mb-4">
-            <a href="blog-post.html" class="blog-post-card-link">
+            <a href="posts/Dubai_Real_Estate_Market_Outlook_2025_A_Strategic_Guide_for_Serious_Investors.html" class="blog-post-card-link">
             <article class="blog-post-card">
               <div class="blog-post-image">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Luxury Properties">
+                <img src="Assets/Dubai_Real_Estate_Market_Outlook_2025_A_Strategic_Guide_for_Serious_Investors.jpg" alt="Dubai Real Estate Market Outlook 2025">
               </div>
               <div class="blog-post-body">
                 <div class="blog-post-meta">
-                  <span><i class="fas fa-calendar-alt"></i> March 5, 2024</span>
+                  <span><i class="fas fa-calendar-alt"></i> March 25, 2025</span>
                 </div>
-                <h2><span style="color: #19191a;">Top 5 Luxury Properties in Dubai Marina</span></h2>
-                <p>Discover the most prestigious properties in Dubai Marina. From stunning penthouses with panoramic views to exclusive beachfront villas, explore the pinnacle of luxury living in Dubai. These properties represent the epitome of sophisticated living, combining world-class amenities with breathtaking architecture.</p>
-                <p>Each property offers unique features including private beaches, infinity pools, state-of-the-art fitness centers, and concierge services. Learn about the architectural marvels and luxury amenities that make these properties stand out in the competitive Dubai real estate market.</p>
+                <h2><span style="color: #19191a;">Dubai Real Estate Market Outlook 2025: A Strategic Guide for Serious Investors</span></h2>
+                <p>Navigate Dubai's transition from "extraordinary recovery" to "sustained maturity" in 2025. Discover transaction volume trends, price normalization patterns, and strategic buy/hold/sell recommendations.</p>
+                <p>Learn about emerging waterfront opportunities, prime established communities, and key macro drivers including interest rate pivots, population growth, and regulatory transparency.</p>
                 <div class="blog-post-tags">
-                  <span class="blog-tag">Luxury</span>
-                  <span class="blog-tag">Dubai Marina</span>
-                  <span class="blog-tag">Properties</span>
+                  <span class="blog-tag">Market Outlook</span>
+                  <span class="blog-tag">Dubai</span>
+                  <span class="blog-tag">2025</span>
                 </div>
                 <span class="primary-btn">Read More <i class="fas fa-arrow-right"></i></span>
               </div>
@@ -628,88 +161,27 @@
 
             <!-- Blog Post 4 -->
             <div class="col-lg-4 col-md-6 mb-4">
-            <a href="blog-post.html" class="blog-post-card-link">
+            <a href="posts/Dubai_Real_Estate_2026_Predictions_and_the_Strategic_Vision_of_Ceylon_Star_Real_Estate.html" class="blog-post-card-link">
             <article class="blog-post-card">
               <div class="blog-post-image">
-                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Property Management">
+                <img src="Assets/Dubai_Real_Estate_2026_Predictions_and_the_Strategic_Vision_of_Ceylon_Star_Real_Estate.jpg" alt="Dubai Real Estate 2026 Predictions">
               </div>
               <div class="blog-post-body">
                 <div class="blog-post-meta">
-                  <span><i class="fas fa-calendar-alt"></i> February 28, 2024</span>
+                  <span><i class="fas fa-calendar-alt"></i> March 30, 2026</span>
                 </div>
-                <h2><span style="color: #19191a;">Property Management Best Practices</span></h2>
-                <p>Essential tips for effective property management in Dubai. Learn about maintenance schedules, tenant relations, and maximizing your property's value through professional management services. Effective property management is key to protecting your investment and ensuring long-term profitability.</p>
-                <p>We'll discuss strategies for tenant retention, preventive maintenance programs, financial management, and leveraging technology to streamline operations. Discover how professional property management can increase your ROI and reduce stress.</p>
+                <h2><span style="color: #19191a;">Dubai Real Estate 2026 Predictions and the Strategic Vision of Ceylon Star Real Estate</span></h2>
+                <p>Explore Dubai's transformative 2026 landscape with the D33 Economic Agenda in full swing. Discover predictions for market maturity, Dubai South expansion, sustainability trends, and the secondary market resurgence.</p>
+                <p>Learn how Ceylon Star Real Estate serves as a strategic bridge for international investors, offering unmatched transparency, expert property management, and hyper-local market intelligence.</p>
                 <div class="blog-post-tags">
-                  <span class="blog-tag">Management</span>
-                  <span class="blog-tag">Tips</span>
-                  <span class="blog-tag">Best Practices</span>
-                </div>
-                <span class="primary-btn">Read More <i class="fas fa-arrow-right"></i></span>
-              </div>
-            </article>
-            </a>
-            </div>
-
-            <!-- Blog Post 5 -->
-            <div class="col-lg-4 col-md-6 mb-4">
-            <a href="blog-post.html" class="blog-post-card-link">
-            <article class="blog-post-card">
-              <div class="blog-post-image">
-                <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Rental Market">
-              </div>
-              <div class="blog-post-body">
-                <div class="blog-post-meta">
-                  <span><i class="fas fa-calendar-alt"></i> February 20, 2024</span>
-                </div>
-                <h2><span style="color: #19191a;">Dubai Rental Market Overview 2024</span></h2>
-                <p>Get insights into Dubai's rental market dynamics. Understand rental trends, pricing strategies, and what tenants are looking for in today's competitive rental market. The rental sector continues to show resilience and growth, offering opportunities for both landlords and tenants.</p>
-                <p>We analyze current rental rates across different areas, tenant preferences, market demand, and future projections. Learn how to price your property competitively and attract quality tenants in the evolving Dubai rental landscape.</p>
-                <div class="blog-post-tags">
-                  <span class="blog-tag">Rental</span>
-                  <span class="blog-tag">Market Analysis</span>
+                  <span class="blog-tag">2026 Predictions</span>
                   <span class="blog-tag">Dubai</span>
+                  <span class="blog-tag">Market Trends</span>
                 </div>
                 <span class="primary-btn">Read More <i class="fas fa-arrow-right"></i></span>
               </div>
             </article>
             </a>
-            </div>
-
-            <!-- Blog Post 6 -->
-            <div class="col-lg-4 col-md-6 mb-4">
-            <a href="blog-post.html" class="blog-post-card-link">
-            <article class="blog-post-card">
-              <div class="blog-post-image">
-                <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Buying Process">
-              </div>
-              <div class="blog-post-body">
-                <div class="blog-post-meta">
-                  <span><i class="fas fa-calendar-alt"></i> February 15, 2024</span>
-                </div>
-                <h2><span style="color: #19191a;">Step-by-Step Guide to Buying Property in Dubai</span></h2>
-                <p>Navigate the property buying process in Dubai with confidence. From initial search to final handover, this guide walks you through each step of purchasing your dream property. Understanding the process helps you make informed decisions and avoid common pitfalls.</p>
-                <p>We cover everything from property search and viewings to financing, legal documentation, and property registration. Learn about required documents, fees, timelines, and what to expect at each stage of your property purchase journey.</p>
-                <div class="blog-post-tags">
-                  <span class="blog-tag">Buying Guide</span>
-                  <span class="blog-tag">Process</span>
-                  <span class="blog-tag">Dubai</span>
-                </div>
-                <span class="primary-btn">Read More <i class="fas fa-arrow-right"></i></span>
-              </div>
-            </article>
-            </a>
-            </div>
-            </div>
-
-            <!-- Pagination -->
-            <div class="col-12">
-            <div class="blog-pagination">
-              <a href="#" class="pagination-btn"><i class="fas fa-chevron-left"></i></a>
-              <a href="#" class="pagination-btn active">1</a>
-              <a href="#" class="pagination-btn">2</a>
-              <a href="#" class="pagination-btn">3</a>
-              <a href="#" class="pagination-btn"><i class="fas fa-chevron-right"></i></a>
             </div>
             </div>
           </div>
